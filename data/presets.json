@@ -1,0 +1,91 @@
+{
+  "presets": [
+    {
+      "id": "web-webp",
+      "name": "網頁最佳化",
+      "tag": "WebP · 85%",
+      "settings": {
+        "format": "webp",
+        "quality": 85,
+        "maxWidth": "",
+        "maxHeight": "",
+        "bgMode": "transparent"
+      }
+    },
+    {
+      "id": "ultra-avif",
+      "name": "極致壓縮",
+      "tag": "AVIF · 75%",
+      "settings": {
+        "format": "avif",
+        "quality": 75,
+        "maxWidth": "",
+        "maxHeight": "",
+        "bgMode": "transparent"
+      }
+    },
+    {
+      "id": "photo-jpg",
+      "name": "相片通用 (HEIC 推薦)",
+      "tag": "JPG · 90%",
+      "settings": {
+        "format": "jpg",
+        "quality": 90,
+        "maxWidth": "",
+        "maxHeight": "",
+        "bgMode": "fill",
+        "bgColor": "#ffffff"
+      }
+    },
+    {
+      "id": "lossless-png",
+      "name": "無損透明",
+      "tag": "PNG · 無損",
+      "settings": {
+        "format": "png",
+        "quality": 100,
+        "maxWidth": "",
+        "maxHeight": "",
+        "bgMode": "transparent"
+      }
+    },
+    {
+      "id": "site-ico",
+      "name": "網站 Favicon",
+      "tag": "ICO · 多尺寸",
+      "settings": {
+        "format": "ico",
+        "icoSizes": "multi",
+        "maxWidth": "",
+        "maxHeight": "",
+        "bgMode": "transparent"
+      }
+    },
+    {
+      "id": "vector-svg",
+      "name": "Logo 轉向量",
+      "tag": "SVG · 向量追蹤",
+      "settings": {
+        "format": "svg",
+        "svgMode": "vector",
+        "svgColors": 16,
+        "maxWidth": "",
+        "maxHeight": "",
+        "bgMode": "transparent"
+      }
+    },
+    {
+      "id": "social-1920",
+      "name": "社群分享縮圖",
+      "tag": "JPG · 1920px",
+      "settings": {
+        "format": "jpg",
+        "quality": 86,
+        "maxWidth": 1920,
+        "maxHeight": 1920,
+        "bgMode": "fill",
+        "bgColor": "#ffffff"
+      }
+    }
+  ]
+}

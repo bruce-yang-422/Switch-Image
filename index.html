@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Switch Image ⇄ 萬能圖片格式極速互轉</title>
+  <meta name="description" content="支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批量互轉與無損壓縮。100% 瀏覽器本地運算，免登入、無廣告、拖放即轉。" />
+  <meta name="keywords" content="圖片格式轉換, 圖片轉檔, WebP 轉 JPG, PNG 轉 WebP, HEIC 轉 JPG, AVIF 轉換, ICO 製作, SVG 轉換, 批次轉檔, 圖片壓縮, 免費線上轉圖, 本地轉檔, Switch Image, image converter, webp converter, heic to jpg, client-side image converter" />
+  <meta name="author" content="Bruce Yang" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="application-name" content="Switch Image" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Switch Image" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#080e1a" media="(prefers-color-scheme: dark)" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Switch Image" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:title" content="Switch Image ⇄ 萬能圖片格式極速互轉" />
+  <meta property="og:description" content="支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批量互轉。100% 瀏覽器本地運算、四國語言、純淨無廣告、免學習秒上手。" />
+  <meta property="og:image" content="./assets/brand/icon-512.png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image:alt" content="Switch Image Logo" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Switch Image ⇄ 萬能圖片格式極速互轉" />
+  <meta name="twitter:description" content="支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批量互轉。100% 瀏覽器本地運算、免登入、純淨無廣告。" />
+  <meta name="twitter:image" content="./assets/brand/icon-512.png" />
+  <meta name="twitter:image:alt" content="Switch Image Logo" />
+
+  <!-- Structured Data (JSON-LD WebApplication) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Switch Image",
+      "alternateName": "Switch Image 萬能圖片格式極速互轉",
+      "description": "100% 瀏覽器本地運算的萬能圖片格式極速互轉工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次互轉、壓縮、縮放、重命名與浮水印。",
+      "image": "./assets/brand/icon-512.png",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires HTML5 Canvas and JavaScript",
+      "softwareVersion": "0.1.0",
+      "inLanguage": ["zh-Hant", "en", "ja", "es"],
+      "isAccessibleForFree": true,
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "Bruce Yang"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "100% Client-Side Local Processing",
+        "Offline-Ready Progressive Web App (PWA)",
+        "9 Image Formats (WebP, PNG, JPG, AVIF, GIF, ICO, SVG, BMP, HEIC)",
+        "Multi-Select ICO Icon Packer (16/32/48/64/128/256px)",
+        "45 Social, E-Commerce & SEO Size Templates",
+        "Batch Renaming & Custom Text/Logo Watermarks",
+        "4 Languages (Traditional Chinese, English, Japanese, Spanish)"
+      ]
+    }
+  </script>
+  <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico" sizes="any" />
+  <link rel="shortcut icon" type="image/x-icon" href="./assets/favicon/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="./assets/brand/logo.svg" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./assets/brand/icon-512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="./manifest.json" />
+
+  <!-- Modular CSS -->
+  <link rel="stylesheet" href="./css/tokens.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/hero.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+
+  <!-- Modular JavaScript -->
+  <script defer src="./js/config/defaults.js"></script>
+  <script defer src="./js/core/i18n.js"></script>
+  <script defer src="./js/utils/formatters.js"></script>
+  <script defer src="./js/utils/renamer.js"></script>
+  <script defer src="./js/utils/folder-reader.js"></script>
+  <script defer src="./js/utils/download.js"></script>
+  <script defer src="./js/utils/zip-builder.js"></script>
+  <script defer src="./js/decoders/heic-decoder.js"></script>
+  <script defer src="./js/decoders/image-decoder.js"></script>
+  <script defer src="./js/encoders/canvas-encoder.js"></script>
+  <script defer src="./js/encoders/gif-encoder.js"></script>
+  <script defer src="./js/encoders/ico-encoder.js"></script>
+  <script defer src="./js/encoders/svg-encoder.js"></script>
+  <script defer src="./js/encoders/bmp-encoder.js"></script>
+  <script defer src="./js/core/capabilities.js"></script>
+  <script defer src="./js/core/watermark.js"></script>
+  <script defer src="./js/core/store.js"></script>
+  <script defer src="./js/core/converter.js"></script>
+  <script defer src="./js/ui/theme.js"></script>
+  <script defer src="./js/ui/toast.js"></script>
+  <script defer src="./js/ui/settings-panel.js"></script>
+  <script defer src="./js/ui/advanced-tools.js"></script>
+  <script defer src="./js/ui/file-list.js"></script>
+  <script defer src="./js/ui/compare-modal.js"></script>
+  <script defer src="./js/ui/format-matrix.js"></script>
+  <script defer src="./js/ui/site-info-modal.js"></script>
+  <script defer src="./js/ui/pwa-install.js"></script>
+  <script defer src="./js/app.js"></script>
+</head>
+<body data-title-key="meta.title">
+  <div class="container">
+    <!-- Minimal Top Navigation -->
+    <nav class="topbar" data-i18n-aria="nav.aria" aria-label="站台導覽">
+      <div class="topbar-brand">
+        <img class="topbar-logo" src="./assets/brand/logo.svg" alt="Switch Image Logo" width="38" height="38" />
+        <span class="topbar-name">Switch Image</span>
+      </div>
+      <div class="topbar-actions">
+        <span class="badge">
+          <span class="badge-dot"></span><span><span data-i18n="nav.badgeMain">100% 本地運算</span><span class="badge-extra" data-i18n="nav.badgeExtra">・不上傳</span></span>
+        </span>
+        <div class="lang-select-wrap">
+          <img class="ui-icon icon-adaptive lang-select-icon" src="./assets/icons/globe.svg" alt="" width="15" height="15" aria-hidden="true" />
+          <select id="langSelect" class="lang-select" data-lang-select data-i18n-aria="nav.langAria" aria-label="切換介面語言">
+            <option value="zh-Hant">繁體中文</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="es">Español</option>
+          </select>
+        </div>
+        <div class="theme-segmented" role="group" data-i18n-aria="sheet.themeHeading" aria-label="外觀主題">
+          <button type="button" class="theme-seg-btn" data-theme-btn="light" data-i18n-title="sheet.themeLight" data-i18n-aria="sheet.themeLight" title="淺色模式" aria-label="淺色模式">
+            <img class="ui-icon" src="./assets/icons/sun.svg" alt="" width="16" height="16" aria-hidden="true" />
+          </button>
+          <button type="button" class="theme-seg-btn" data-theme-btn="dark" data-i18n-title="sheet.themeDark" data-i18n-aria="sheet.themeDark" title="深色模式" aria-label="深色模式">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/moon.svg" alt="" width="16" height="16" aria-hidden="true" />
+          </button>
+          <button type="button" class="theme-seg-btn" data-theme-btn="system" data-i18n-title="sheet.themeSystem" data-i18n-aria="sheet.themeSystem" title="跟隨系統" aria-label="跟隨系統">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/monitor.svg" alt="" width="16" height="16" aria-hidden="true" />
+          </button>
+        </div>
+        <button id="siteInfoBtn" type="button" class="btn-icon" data-i18n-title="nav.infoTitle" data-i18n-aria="nav.infoTitle" title="網站資訊與設定" aria-label="網站資訊與設定">
+          <img class="ui-icon icon-adaptive" src="./assets/icons/info.svg" alt="" width="18" height="18" aria-hidden="true" />
+        </button>
+      </div>
+    </nav>
+
+    <!-- Focused Lean Hero (Compact ~25% on mobile, keeps core tool front & center) -->
+    <header class="hero-lean">
+      <h1 class="hero-title">
+        <span class="hero-brand-repeat">Switch Image</span>
+        <img class="ui-icon hero-swap-icon" src="./assets/icons/swap.svg" alt="" width="30" height="30" aria-hidden="true" />
+        <span data-i18n="hero.titleMain">萬能圖片格式極速互轉</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n-html="hero.subtitleHtml">
+        支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、HEIC 互轉。<strong>選格式 → 拖進圖片 → 立即下載</strong><span class="hero-sub-extra">，檔案完全不經伺服器</span>。
+      </p>
+      <div class="trust-strip" data-i18n-aria="trust.aria" aria-label="四大承諾">
+        <span class="trust-pill" data-i18n-title="trust.fastTip" title="拖拉即轉，百張圖片秒級處理、一鍵 ZIP 打包">
+          <img class="ui-icon" src="./assets/icons/bolt.svg" alt="" width="15" height="15" aria-hidden="true" />
+          <span class="trust-pill-text"><strong data-i18n="trust.fastTitle">極速批量</strong><span class="trust-pill-detail" data-i18n="trust.fastDetail">・一鍵下載 / ZIP</span></span>
+        </span>
+        <span class="trust-pill" data-i18n-title="trust.formatsTip" title="主流網頁、設計、圖示與 HEIC 格式自由切換">
+          <img class="ui-icon icon-primary" src="./assets/icons/layers.svg" alt="" width="15" height="15" aria-hidden="true" />
+          <span class="trust-pill-text"><strong data-i18n="trust.formatsTitle">全格式支援</strong><span class="trust-pill-detail" data-i18n="trust.formatsDetail">・9 大格式</span></span>
+        </span>
+        <span class="trust-pill" data-i18n-title="trust.freeTip" title="免登入、免註冊、無次數與檔案大小限制">
+          <img class="ui-icon" src="./assets/icons/unlock.svg" alt="" width="15" height="15" aria-hidden="true" />
+          <span class="trust-pill-text"><strong data-i18n="trust.freeTitle">零門檻</strong><span class="trust-pill-detail" data-i18n="trust.freeDetail">・免登入無限制</span></span>
+        </span>
+        <span class="trust-pill" data-i18n-title="trust.privacyTip" title="完全免費、無干擾彈窗，隱私 100% 留在本機">
+          <img class="ui-icon" src="./assets/icons/shield.svg" alt="" width="15" height="15" aria-hidden="true" />
+          <span class="trust-pill-text"><strong data-i18n="trust.privacyTitle">純淨無廣告</strong><span class="trust-pill-detail" data-i18n="trust.privacyDetail">・隱私留本機</span></span>
+        </span>
+      </div>
+    </header>
+
+    <div id="compatWarning" class="compat-warning" role="alert"></div>
+
+    <!-- Main Unified Studio Card: Step 1 (Pick Format) + Step 2 (Drop & Go) -->
+    <main class="card studio-card">
+      <!-- Step 1: Output Format Picker -->
+      <section class="studio-step" data-i18n-aria="step1.aria" aria-label="選擇目標輸出格式">
+        <div class="step-head">
+          <div class="step-title-wrap">
+            <span class="step-num">1</span>
+            <span class="step-title" data-i18n="step1.title">想轉成什麼格式？</span>
+          </div>
+          <span id="formatHint" class="step-hint"></span>
+        </div>
+
+        <div id="formatSelector" class="format-bar" role="radiogroup" data-i18n-aria="step1.aria" aria-label="選擇目標輸出格式"></div>
+
+        <!-- Inline Context Bar: shows ONLY the 1 relevant quick option for JPG/ICO/SVG -->
+        <div id="contextQuickBar" class="context-quick-bar hidden">
+          <!-- JPG / BMP white-black fill quick switch -->
+          <div id="quickBgGroup" class="quick-group hidden">
+            <span class="quick-label" data-i18n="quick.bgLabel">透明處補底色：</span>
+            <div id="bgSwatches" class="bg-swatches" role="group">
+              <button type="button" class="swatch-btn active" data-bg-color="#ffffff">
+                <span class="swatch-dot swatch-dot-white"></span><span data-i18n="quick.bgWhite">白底</span>
+              </button>
+              <button type="button" class="swatch-btn" data-bg-color="#000000">
+                <span class="swatch-dot swatch-dot-black"></span><span data-i18n="quick.bgBlack">黑底</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ICO multi-select size chips + 2 quick preset sets -->
+          <div id="icoField" class="quick-group ico-quick-group hidden">
+            <div class="ico-quick-head">
+              <span class="quick-label" data-i18n="quick.icoLabel">ICO 尺寸（可複選）：</span>
+              <div id="icoPresetGroup" class="ico-preset-group" role="group">
+                <button type="button" class="ico-preset-btn" data-ico-preset="16,32,48" data-i18n="quick.icoPresetWeb" title="16 / 32 / 48px">網頁 Favicon</button>
+                <button type="button" class="ico-preset-btn" data-ico-preset="16,32,48,256" data-i18n="quick.icoPresetStd" title="16 / 32 / 48 / 256px">系統標準</button>
+              </div>
+              <span id="icoSelectedCount" class="ico-count-badge"></span>
+            </div>
+            <div id="icoSizesGroup" class="ico-size-chips" role="group" data-i18n-aria="quick.icoLabel" aria-label="ICO 尺寸（可複選）"></div>
+          </div>
+
+          <!-- SVG quick mode selector -->
+          <div id="svgModeField" class="quick-group hidden">
+            <label class="quick-label" for="svgModeSelect" data-i18n="quick.svgModeLabel">SVG 模式：</label>
+            <select id="svgModeSelect" class="quick-select"></select>
+          </div>
+          <div id="svgColorsField" class="quick-group hidden">
+            <label class="quick-label" for="svgColorsRange" data-i18n="quick.svgColorsLabel">色階：</label>
+            <input id="svgColorsRange" class="quick-range" type="range" min="2" max="32" value="16" />
+            <span id="svgColorsValue" class="quick-val">16 色</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2: Dropzone (Automatically compacts to a slim add-more bar once files are added!) -->
+      <section class="studio-drop-wrap">
+        <div id="dropzone" class="dropzone" tabindex="0" role="button">
+          <input id="fileInput" type="file" accept="image/*,.heic,.heif,.avif,.ico,.svg,.webp,.bmp" multiple hidden />
+          <input id="folderInput" type="file" webkitdirectory directory multiple hidden />
+
+          <!-- Full view (when empty) -->
+          <div class="dropzone-full">
+            <img class="dropzone-illustration" src="./assets/illustrations/dropzone-hero.svg" alt="" width="144" height="96" aria-hidden="true" />
+            <h2 data-i18n-html="drop.headingHtml">把圖片拖進來，立即轉成 <strong id="emptyTargetFormat">.webp</strong></h2>
+            <p data-i18n-html="drop.subHtml">丟 1 張直接下載、丟多張自動打包 ZIP・也可按 <strong>Ctrl + V</strong> 直接貼上截圖</p>
+            <div class="dropzone-actions">
+              <button id="selectFilesBtn" type="button" class="btn btn-primary btn-lg">
+                <img class="ui-icon icon-adaptive" src="./assets/icons/image.svg" alt="" width="18" height="18" aria-hidden="true" />
+                <span data-i18n="drop.selectFiles">選擇圖片</span>
+              </button>
+              <button id="selectFolderBtn" type="button" class="btn btn-secondary btn-lg">
+                <img class="ui-icon icon-adaptive" src="./assets/icons/folder.svg" alt="" width="17" height="17" aria-hidden="true" />
+                <span data-i18n="drop.selectFolder">選擇資料夾</span>
+              </button>
+            </div>
+            <div class="dropzone-formats">
+              <img class="ui-icon" src="./assets/icons/sparkles.svg" alt="" width="14" height="14" aria-hidden="true" />
+              <span data-i18n="drop.supportedInput">支援輸入：PNG・JPG・WebP・AVIF・GIF・ICO・SVG・BMP・iPhone HEIC</span>
+            </div>
+          </div>
+
+          <!-- Compact view (automatically shown after files are added so results stay front & center!) -->
+          <div class="dropzone-compact">
+            <div class="dropzone-compact-left">
+              <img class="ui-icon icon-primary" src="./assets/icons/plus.svg" alt="" width="18" height="18" aria-hidden="true" />
+              <span data-i18n-html="drop.compactHtml">繼續拖放圖片、按 <strong>Ctrl + V</strong> 貼上，或</span>
+            </div>
+            <div class="dropzone-compact-actions">
+              <button id="selectFilesBtnCompact" type="button" class="btn btn-secondary btn-sm">
+                <img class="ui-icon icon-adaptive" src="./assets/icons/image.svg" alt="" width="14" height="14" aria-hidden="true" />
+                <span data-i18n="drop.addFiles">加入圖片</span>
+              </button>
+              <button id="selectFolderBtnCompact" type="button" class="btn btn-secondary btn-sm">
+                <img class="ui-icon icon-adaptive" src="./assets/icons/folder.svg" alt="" width="14" height="14" aria-hidden="true" />
+                <span data-i18n="drop.addFolder">加入資料夾</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Optional Tools Dock (Collapsed by default = Zero clutter, 1 click to expand!) -->
+      <section class="tools-dock">
+        <div id="toolDockButtons" class="dock-pills" role="tablist">
+          <span class="dock-label" data-i18n="dock.label">選用微調：</span>
+          <button type="button" class="dock-pill" data-drawer="basic" role="tab" aria-selected="false">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/sliders.svg" alt="" width="15" height="15" aria-hidden="true" />
+            <span data-i18n="dock.basic">畫質與尺寸</span>
+            <span id="badgeBasic" class="dock-badge"></span>
+          </button>
+          <button type="button" class="dock-pill" data-drawer="ecommerce" role="tab" aria-selected="false">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/grid.svg" alt="" width="15" height="15" aria-hidden="true" />
+            <span data-i18n="dock.ecommerce">社群／電商尺寸庫</span>
+            <span id="badgeEcommerce" class="dock-badge"></span>
+          </button>
+          <button type="button" class="dock-pill" data-drawer="rename" role="tab" aria-selected="false">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/tag.svg" alt="" width="15" height="15" aria-hidden="true" />
+            <span data-i18n="dock.rename">檔名前綴／後綴</span>
+            <span id="badgeRename" class="dock-badge"></span>
+          </button>
+          <button type="button" class="dock-pill" data-drawer="watermark" role="tab" aria-selected="false">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/stamp.svg" alt="" width="15" height="15" aria-hidden="true" />
+            <span data-i18n="dock.watermark">自訂浮水印</span>
+            <span id="badgeWatermark" class="dock-badge"></span>
+          </button>
+          <button id="reconvertBtn" type="button" class="btn btn-secondary btn-sm dock-reconvert hidden" disabled data-i18n-title="dock.reconvertTitle" title="使用目前設定重新轉換">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/refresh.svg" alt="" width="14" height="14" aria-hidden="true" />
+            <span data-i18n="dock.reconvert">重新套用</span>
+          </button>
+        </div>
+
+        <!-- Single Collapsible Drawer Container (only opens when user clicks a pill above) -->
+        <div id="toolDrawer" class="tool-drawer hidden">
+          <!-- Drawer 1: Basic Quality, Size & Background -->
+          <div data-drawer-panel="basic" class="drawer-panel hidden">
+            <div id="presetsBar" class="presets-row"></div>
+            <div class="adv-form-grid">
+              <div class="field">
+                <label for="qualityRange">
+                  <span data-i18n="basic.quality">輸出畫質</span>
+                  <span id="qualityHint" class="hint">建議 75% – 90%</span>
+                </label>
+                <div class="range-wrap">
+                  <input id="qualityRange" type="range" min="1" max="100" value="85" />
+                  <span id="qualityValue" class="quality-value">85%</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="maxWidth">
+                  <span data-i18n="basic.sizeLimit">尺寸限制（px）</span>
+                  <span class="hint" data-i18n="basic.sizeHint">留空保留原尺寸</span>
+                </label>
+                <div class="input-group">
+                  <input id="maxWidth" type="number" min="1" max="16383" data-i18n-placeholder="basic.widthPh" placeholder="寬" />
+                  <span class="input-sep">×</span>
+                  <input id="maxHeight" type="number" min="1" max="16383" data-i18n-placeholder="basic.heightPh" placeholder="高" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="resizeMode" data-i18n="basic.resizeMode">縮放方式</label>
+                <select id="resizeMode">
+                  <option value="contain" selected data-i18n="basic.modeContain">等比縮放（不裁切）</option>
+                  <option value="pad" data-i18n="basic.modePad">固定畫布置中補底色（方圖推薦）</option>
+                  <option value="cover" data-i18n="basic.modeCover">固定尺寸滿版置中裁切</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="bgMode">
+                  <span data-i18n="basic.bgTitle">透明背景處理</span>
+                  <span id="bgHint" class="hint">可保留透明或填底</span>
+                </label>
+                <div class="color-row">
+                  <select id="bgMode">
+                    <option value="transparent" selected data-i18n="basic.bgTransparent">保留透明背景</option>
+                    <option value="fill" data-i18n="basic.bgFill">填入指定底色</option>
+                  </select>
+                  <input id="bgColor" type="color" value="#ffffff" class="hidden" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drawer 2: E-commerce, Social, SEO & Niche Size Library -->
+          <div data-drawer-panel="ecommerce" class="drawer-panel hidden">
+            <div class="tpl-filter-bar">
+              <div id="tplCategoryBar" class="tpl-categories" role="tablist"></div>
+              <div class="search-input-wrap">
+                <img class="ui-icon search-input-icon" src="./assets/icons/search.svg" alt="" width="15" height="15" aria-hidden="true" />
+                <input id="tplSearchInput" type="text" class="tpl-search-input" data-i18n-placeholder="tpl.searchPh" placeholder="搜尋：Google表單、FB封面、1080..." />
+              </div>
+            </div>
+            <div class="tpl-toolbar">
+              <label class="checkbox-label">
+                <input id="templateApplySuffix" type="checkbox" checked />
+                <span data-i18n-html="tpl.applySuffixHtml">套用時自動加上檔名後綴（例如 <code>_gform</code>、<code>_fbCover</code>）</span>
+              </label>
+              <button id="clearTemplateBtn" type="button" class="btn btn-secondary btn-sm" data-i18n="tpl.resetSize">重設尺寸限制</button>
+            </div>
+            <div id="ecommerceGrid" class="ecommerce-grid"></div>
+          </div>
+
+          <!-- Drawer 3: Batch Renaming -->
+          <div data-drawer-panel="rename" class="drawer-panel hidden">
+            <div class="adv-form-grid">
+              <div class="field">
+                <label for="renamePrefix"><span data-i18n="rename.prefix">檔名前綴</span><span class="hint" data-i18n="rename.prefixHint">加在最前面</span></label>
+                <input id="renamePrefix" type="text" data-i18n-placeholder="rename.prefixPh" placeholder="例：shopee_" />
+              </div>
+              <div class="field">
+                <label for="renameSuffix"><span data-i18n="rename.suffix">檔名後綴</span><span class="hint" data-i18n="rename.suffixHint">加在副檔名前</span></label>
+                <input id="renameSuffix" type="text" data-i18n-placeholder="rename.suffixPh" placeholder="例：_800px" />
+              </div>
+              <div class="field">
+                <label for="renameBase"><span data-i18n="rename.base">統一主檔名</span><span class="hint" data-i18n="rename.baseHint">留空保留原名</span></label>
+                <input id="renameBase" type="text" data-i18n-placeholder="rename.basePh" placeholder="例：product" />
+              </div>
+              <div class="field">
+                <label class="checkbox-label">
+                  <input id="renameSeqToggle" type="checkbox" />
+                  <span data-i18n="rename.seqToggle">加上流水編號</span>
+                </label>
+                <div class="input-group">
+                  <input id="renameSeqStart" type="number" min="0" max="99999" value="1" />
+                  <span class="input-sep" data-i18n="rename.seqPad">位數</span>
+                  <input id="renameSeqPad" type="number" min="1" max="6" value="2" />
+                </div>
+              </div>
+            </div>
+            <div class="rename-preview-bar">
+              <span id="renamePreview" class="rename-preview-text">product_photo.png → product_photo.webp</span>
+              <button id="resetRenameBtn" type="button" class="btn btn-secondary btn-sm" data-i18n="rename.reset">清除命名規則</button>
+            </div>
+          </div>
+
+          <!-- Drawer 4: Custom Watermark -->
+          <div data-drawer-panel="watermark" class="drawer-panel hidden">
+            <div class="wm-header-row">
+              <label class="checkbox-label">
+                <input id="wmEnabled" type="checkbox" />
+                <span data-i18n="wm.enable">啟用圖片浮水印（自動套用於所有非 ICO 圖片）</span>
+              </label>
+            </div>
+            <div id="wmControlsBody" class="wm-controls-body disabled-block">
+              <div class="adv-form-grid">
+                <div class="field">
+                  <label for="wmType" data-i18n="wm.type">類型</label>
+                  <select id="wmType">
+                    <option value="text" selected data-i18n="wm.typeText">文字浮水印</option>
+                    <option value="image" data-i18n="wm.typeImage">圖片 Logo 浮水印</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="wmPosition" data-i18n="wm.position">位置</label>
+                  <select id="wmPosition">
+                    <option value="bottom-right" selected data-i18n="wm.posBR">右下角</option>
+                    <option value="bottom-left" data-i18n="wm.posBL">左下角</option>
+                    <option value="top-right" data-i18n="wm.posTR">右上角</option>
+                    <option value="top-left" data-i18n="wm.posTL">左上角</option>
+                    <option value="center" data-i18n="wm.posCenter">正中央</option>
+                    <option value="tile" data-i18n="wm.posTile">全圖斜向滿版平鋪</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="wmOpacity"><span data-i18n="wm.opacity">不透明度</span> <span id="wmOpacityVal" class="hint">50%</span></label>
+                  <div class="range-wrap">
+                    <input id="wmOpacity" type="range" min="10" max="100" value="50" />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="wmAngle"><span data-i18n="wm.angle">角度</span> <span id="wmAngleVal" class="hint">0°</span></label>
+                  <div class="range-wrap">
+                    <input id="wmAngle" type="range" min="-45" max="45" value="0" />
+                  </div>
+                </div>
+              </div>
+
+              <div id="wmTextFields" class="adv-form-grid">
+                <div class="field">
+                  <label for="wmText" data-i18n="wm.text">浮水印文字</label>
+                  <input id="wmText" type="text" value="© SwitchImage" data-i18n-placeholder="wm.textPh" placeholder="輸入品牌名稱或版權字樣" />
+                </div>
+                <div class="field">
+                  <label for="wmFontSize"><span data-i18n="wm.fontSize">文字大小</span> <span id="wmFontSizeVal" class="hint">4.5%</span></label>
+                  <div class="range-wrap">
+                    <input id="wmFontSize" type="range" min="2" max="15" step="0.5" value="4.5" />
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="wmColor" data-i18n="wm.color">文字顏色</label>
+                  <input id="wmColor" type="color" value="#ffffff" />
+                </div>
+              </div>
+
+              <div id="wmImageFields" class="adv-form-grid hidden">
+                <div class="field">
+                  <label for="wmLogoFile" data-i18n="wm.uploadLogo">上傳浮水印 Logo</label>
+                  <div class="wm-logo-upload">
+                    <label for="wmLogoFile" class="btn btn-secondary btn-sm wm-logo-btn">
+                      <img class="ui-icon icon-adaptive" src="./assets/icons/image.svg" alt="" width="14" height="14" aria-hidden="true" />
+                      <span data-i18n="wm.chooseLogo">選擇 Logo</span>
+                    </label>
+                    <input id="wmLogoFile" type="file" accept="image/*" hidden />
+                    <span id="wmLogoStatus" class="wm-logo-status" data-i18n="wm.logoHint">建議使用透明背景 PNG / SVG</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="wmLogoScale"><span data-i18n="wm.logoScale">Logo 比例</span> <span id="wmLogoScaleVal" class="hint">18%</span></label>
+                  <div class="range-wrap">
+                    <input id="wmLogoScale" type="range" min="5" max="50" value="18" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Results Area (Jumps right into view once images are added) -->
+    <section id="resultsSection" class="results-section hidden">
+      <div class="result-bar card">
+        <div class="stats" id="statsBar"></div>
+        <div class="toolbar-actions">
+          <button id="clearAllBtn" type="button" class="btn btn-danger-ghost btn-sm">
+            <img class="ui-icon" src="./assets/icons/trash.svg" alt="" width="14" height="14" aria-hidden="true" />
+            <span data-i18n="results.clear">清空</span>
+          </button>
+          <button id="downloadAllBtn" type="button" class="btn btn-secondary btn-sm hidden" disabled>
+            <img class="ui-icon icon-adaptive" src="./assets/icons/download.svg" alt="" width="14" height="14" aria-hidden="true" />
+            <span data-i18n="results.downloadAll">逐一下載</span>
+          </button>
+          <button id="downloadZipBtn" type="button" class="btn btn-primary btn-lg" disabled>
+            <img class="ui-icon icon-adaptive" src="./assets/icons/download.svg" alt="" width="17" height="17" aria-hidden="true" />
+            <span id="downloadPrimaryLabel" data-i18n="results.downloadDefault">下載圖片</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+    </section>
+
+    <!-- Borderless Informational Footer (Desktop only; moved into Site Info & Settings sheet on mobile) -->
+    <section class="info-footer">
+      <details class="matrix-inline">
+        <summary>
+          <span class="matrix-summary-left">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/grid.svg" alt="" width="15" height="15" aria-hidden="true" />
+            <span data-i18n="matrix.summary">查看支援的 9 大格式與本機瀏覽器能力一覽</span>
+          </span>
+          <img class="ui-icon matrix-chevron" src="./assets/icons/chevron-down.svg" alt="" width="16" height="16" aria-hidden="true" />
+        </summary>
+        <div id="formatMatrixGrid" class="matrix-grid"></div>
+      </details>
+
+      <footer class="site-footer">
+        <div class="footer-tip">
+          <img class="ui-icon" src="./assets/icons/sparkles.svg" alt="" width="14" height="14" aria-hidden="true" />
+          <span data-i18n="footer.tip">小撇步：點擊轉換清單中的縮圖可大圖預覽成品（確認裁切、底色與浮水印）；右側選單可為單張圖片切換不同格式。</span>
+        </div>
+        <div class="footer-meta-row">
+          <span data-i18n="footer.privacy">Switch Image 100% 瀏覽器本地運算・純淨無廣告・檔案絕不離開您的裝置。</span>
+          <button type="button" class="footer-pwa-link hidden" data-pwa-install-entry data-pwa-install-trigger>
+            <img class="ui-icon icon-adaptive" src="./assets/icons/install-app.svg" alt="" width="13" height="13" aria-hidden="true" />
+            <span data-pwa-entry-label>安裝離線應用程式</span>
+          </button>
+        </div>
+      </footer>
+    </section>
+
+    <noscript>
+      <div class="compat-warning show">Switch Image 需啟用 JavaScript 才能在瀏覽器本地執行圖片格式轉換。</div>
+    </noscript>
+  </div>
+
+  <!-- Site Info & Settings Modal / Floating Side Drawer (PC) / Bottom Sheet (Mobile) -->
+  <div id="siteInfoModal" class="modal-backdrop sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="siteInfoTitle">
+    <div class="modal sheet-modal">
+      <div class="modal-header">
+        <div id="siteInfoTitle" class="modal-title">
+          <span class="sheet-title-desktop" data-i18n="sheet.titleDesktop">關於網站</span>
+          <span class="sheet-title-mobile" data-i18n="sheet.title">關於與設定</span>
+        </div>
+        <button id="closeSiteInfoBtn" type="button" class="btn-icon btn-icon-sm" data-i18n-aria="sheet.closeAria" aria-label="關閉關於與設定">
+          <img class="ui-icon icon-adaptive" src="./assets/icons/close.svg" alt="" width="16" height="16" aria-hidden="true" />
+        </button>
+      </div>
+      <div class="sheet-body">
+        <!-- App Identity Card (International IT Utility About Pattern) -->
+        <div class="about-brand-card">
+          <img class="about-brand-logo" src="./assets/brand/logo.svg" alt="Switch Image Logo" width="38" height="38" />
+          <div class="about-brand-info">
+            <div class="about-brand-head">
+              <span class="about-brand-name">Switch Image</span>
+              <span class="about-version-pill">v0.1.0</span>
+            </div>
+            <p class="about-brand-tagline" data-i18n="about.tagline">純前端本地運算的萬能圖片格式互轉工作台</p>
+          </div>
+        </div>
+
+        <!-- Mobile-only Language Switcher (PC uses topbar selector) -->
+        <div class="sheet-section sheet-mobile-only">
+          <div class="sheet-heading" data-i18n="sheet.langHeading">介面語言</div>
+          <div class="sheet-pill-grid" role="group">
+            <button type="button" class="sheet-pill-btn" data-lang-btn="zh-Hant">繁體中文</button>
+            <button type="button" class="sheet-pill-btn" data-lang-btn="en">English</button>
+            <button type="button" class="sheet-pill-btn" data-lang-btn="ja">日本語</button>
+            <button type="button" class="sheet-pill-btn" data-lang-btn="es">Español</button>
+          </div>
+        </div>
+
+        <!-- Mobile-only Theme Switcher (PC uses topbar 3-mode icon control) -->
+        <div class="sheet-section sheet-row-between sheet-mobile-only">
+          <div class="sheet-theme-meta">
+            <div class="sheet-heading" data-i18n="sheet.themeHeading">外觀主題</div>
+            <span class="sheet-mode-caption" data-theme-mode-label>跟隨系統</span>
+          </div>
+          <div class="theme-segmented theme-segmented-sheet" role="group" data-i18n-aria="sheet.themeHeading" aria-label="外觀主題">
+            <button type="button" class="theme-seg-btn" data-theme-btn="light" data-i18n-title="sheet.themeLight" data-i18n-aria="sheet.themeLight" title="淺色模式" aria-label="淺色模式">
+              <img class="ui-icon" src="./assets/icons/sun.svg" alt="" width="17" height="17" aria-hidden="true" />
+            </button>
+            <button type="button" class="theme-seg-btn" data-theme-btn="dark" data-i18n-title="sheet.themeDark" data-i18n-aria="sheet.themeDark" title="深色模式" aria-label="深色模式">
+              <img class="ui-icon icon-adaptive" src="./assets/icons/moon.svg" alt="" width="17" height="17" aria-hidden="true" />
+            </button>
+            <button type="button" class="theme-seg-btn" data-theme-btn="system" data-i18n-title="sheet.themeSystem" data-i18n-aria="sheet.themeSystem" title="跟隨系統" aria-label="跟隨系統">
+              <img class="ui-icon icon-adaptive" src="./assets/icons/monitor.svg" alt="" width="17" height="17" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Technical Specs, Privacy & Shortcuts (International IT Utility Info Pattern) -->
+        <div class="sheet-section">
+          <div class="sheet-heading" data-i18n="about.infoHeading">技術與隱私資訊</div>
+          <dl class="about-spec-list">
+            <div class="about-spec-row">
+              <dt data-i18n="about.processingLabel">運算模式</dt>
+              <dd class="about-spec-ok" data-i18n="about.processingVal">100% 本地瀏覽器運算</dd>
+            </div>
+            <div class="about-spec-row">
+              <dt data-i18n="about.privacyLabel">隱私政策</dt>
+              <dd data-i18n="about.privacyVal">零上傳・無追蹤・無廣告</dd>
+            </div>
+            <div class="about-spec-row">
+              <dt data-i18n="about.stackLabel">技術架構</dt>
+              <dd class="about-spec-mono">Zero-Build · Canvas / Pure JS</dd>
+            </div>
+            <div class="about-spec-row">
+              <dt data-i18n="about.shortcutsLabel">快捷鍵</dt>
+              <dd class="about-shortcuts" data-i18n-html="about.shortcutsHtml"><kbd>Ctrl</kbd>+<kbd>V</kbd> 貼上 · <kbd>Esc</kbd> 關閉</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Mobile-only sections (Desktop already shows these directly at page bottom) -->
+        <div class="sheet-section sheet-mobile-only">
+          <div class="sheet-info-list">
+            <div class="sheet-tip-line">
+              <img class="ui-icon" src="./assets/icons/sparkles.svg" alt="" width="14" height="14" aria-hidden="true" />
+              <span data-i18n="footer.tip">小撇步：點擊轉換清單中的圖片縮圖可滑動對比原圖畫質；右側小選單可為單張圖片切換不同格式。</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile-only Low-Key PWA Install Entry (Desktop uses subtle bottom footer link) -->
+        <button type="button" class="sheet-install-row sheet-mobile-only hidden" data-pwa-install-entry data-pwa-install-trigger>
+          <span class="sheet-install-left">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/install-app.svg" alt="" width="16" height="16" aria-hidden="true" />
+            <span data-pwa-entry-label>安裝離線應用程式</span>
+          </span>
+          <span class="about-version-pill">PWA</span>
+        </button>
+
+        <details class="sheet-matrix-details sheet-mobile-only">
+          <summary>
+            <span class="matrix-summary-left">
+              <img class="ui-icon icon-adaptive" src="./assets/icons/grid.svg" alt="" width="15" height="15" aria-hidden="true" />
+              <span data-i18n="sheet.matrixHeading">支援的 9 大格式與本機能力</span>
+            </span>
+            <img class="ui-icon matrix-chevron" src="./assets/icons/chevron-down.svg" alt="" width="16" height="16" aria-hidden="true" />
+          </summary>
+          <div id="formatMatrixGridSheet" class="matrix-grid sheet-matrix-grid"></div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Output Lightbox Preview Modal -->
+  <div id="compareModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal preview-modal">
+      <div class="modal-header">
+        <div id="modalTitle" class="modal-title" data-i18n="modal.title">成品預覽</div>
+        <button id="closeModalBtn" type="button" class="btn-icon btn-icon-sm" data-i18n-aria="modal.closeAria" aria-label="關閉預覽">
+          <img class="ui-icon icon-adaptive" src="./assets/icons/close.svg" alt="" width="16" height="16" aria-hidden="true" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="compareStage" class="preview-stage checkerboard">
+          <img id="compareOutImg" alt="Converted preview" />
+        </div>
+        <div class="modal-footer">
+          <span id="modalMeta" data-i18n="modal.hint">點擊圖片可切換 100% 原吋檢視</span>
+          <button id="modalDownloadBtn" type="button" class="btn btn-primary btn-sm">
+            <img class="ui-icon icon-adaptive" src="./assets/icons/download.svg" alt="" width="14" height="14" aria-hidden="true" />
+            <span id="modalDownloadLabel" data-i18n="modal.downloadFallback">下載此檔案</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Low-Key First-Visit PWA Install Prompt (Platform-Tailored) -->
+  <aside id="pwaBanner" class="pwa-banner hidden" role="region" aria-live="polite" aria-labelledby="pwaBannerTitle">
+    <div class="pwa-banner-top">
+      <img class="pwa-banner-logo" src="./assets/brand/logo.svg" alt="" width="34" height="34" aria-hidden="true" />
+      <div class="pwa-banner-copy">
+        <div id="pwaBannerTitle" class="pwa-banner-title">安裝離線應用程式</div>
+        <p id="pwaBannerDesc" class="pwa-banner-desc">建立獨立應用視窗並啟用離線快取，無網路也能極速轉檔。</p>
+      </div>
+      <button id="pwaBannerClose" type="button" class="btn-icon btn-icon-sm pwa-close-btn" data-i18n-aria="modal.closeAria" aria-label="關閉預覽">
+        <img class="ui-icon icon-adaptive" src="./assets/icons/close.svg" alt="" width="14" height="14" aria-hidden="true" />
+      </button>
+    </div>
+    <div class="pwa-banner-actions">
+      <button id="pwaBannerDismiss" type="button" class="btn btn-secondary btn-sm">稍後再說</button>
+      <button id="pwaBannerAction" type="button" class="btn btn-primary btn-sm">安裝應用</button>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

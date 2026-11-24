@@ -1,0 +1,39 @@
+{
+  "id": "./",
+  "name": "Switch Image ⇄ 萬能圖片格式極速互轉",
+  "short_name": "Switch Image",
+  "description": "100% 瀏覽器本地運算的萬能圖片格式互轉工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次轉換、壓縮、縮放、浮水印與離線使用。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080e1a",
+  "theme_color": "#2563eb",
+  "categories": ["utilities", "photo", "productivity"],
+  "icons": [
+    {
+      "src": "./assets/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./assets/favicon/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/brand/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
