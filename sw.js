@@ -3,7 +3,7 @@
  * Enables full offline image conversion with stale-while-revalidate caching
  * using relative paths (compatible with root domains and GitHub Pages subpaths).
  */
-const CACHE_NAME = 'switchimage-static-v0.1.0';
+const CACHE_NAME = 'switchimage-static-v0.1.1';
 
 const CORE_ASSETS = [
   './',

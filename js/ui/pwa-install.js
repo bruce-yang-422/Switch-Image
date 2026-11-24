@@ -182,11 +182,17 @@
       window.location.hostname === '127.0.0.1';
     if (!isSecure) return;
 
-    window.addEventListener('load', () => {
+    const register = () => {
       navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {
         // Silently ignore SW registration failure in restricted environments
       });
-    });
+    };
+
+    if (document.readyState === 'complete') {
+      register();
+    } else {
+      window.addEventListener('load', register, { once: true });
+    }
   }
 
   function init(refs) {
