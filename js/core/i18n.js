@@ -16,16 +16,16 @@
 
   const MESSAGES = {
     'zh-Hant': {
-      'meta.title': 'Switch Image ⇄ 萬能圖片格式極速互轉',
-      'meta.description': '支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批量互轉與無損壓縮。100% 瀏覽器本地運算，免登入、無廣告、拖放即轉。',
+      'meta.title': 'Switch Image｜免費線上圖片轉換工具・支援 9 種格式',
+      'meta.description': '免費線上圖片轉換工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次轉檔、壓縮、裁切與浮水印。圖片全程在瀏覽器本地處理，免上傳、免登入、無廣告。',
       'nav.aria': '站台導覽',
       'nav.badgeMain': '100% 本地運算',
       'nav.badgeExtra': '・不上傳',
       'nav.langAria': '切換介面語言',
       'nav.themeTitle': '切換深色／淺色主題',
       'nav.infoTitle': '網站資訊與設定',
-      'hero.titleMain': '萬能圖片格式極速互轉',
-      'hero.subtitleHtml': '支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、HEIC 互轉。<strong>選格式 → 拖進圖片 → 立即下載</strong><span class="hero-sub-extra">，檔案完全不經伺服器</span>。',
+      'hero.titleMain': '免費線上圖片轉換工具',
+      'hero.subtitleHtml': '線上轉換 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、HEIC 圖片。<strong>選格式 → 拖進圖片 → 立即下載</strong><span class="hero-sub-extra">，檔案完全不經伺服器</span>。',
       'trust.aria': '四大承諾',
       'trust.fastTitle': '極速批量',
       'trust.fastDetail': '・一鍵下載 / ZIP',

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Switch Image ⇄ 萬能圖片格式極速互轉</title>
-  <meta name="description" content="支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批量互轉與無損壓縮。100% 瀏覽器本地運算，免登入、無廣告、拖放即轉。" />
-  <meta name="keywords" content="圖片格式轉換, 圖片轉檔, WebP 轉 JPG, PNG 轉 WebP, HEIC 轉 JPG, AVIF 轉換, ICO 製作, SVG 轉換, 批次轉檔, 圖片壓縮, 免費線上轉圖, 本地轉檔, Switch Image, image converter, webp converter, heic to jpg, client-side image converter" />
+  <title>Switch Image｜免費線上圖片轉換工具・支援 9 種格式</title>
+  <meta name="description" content="免費線上圖片轉換工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次轉檔、壓縮、裁切與浮水印。圖片全程在瀏覽器本地處理，免上傳、免登入、無廣告。" />
+  <meta name="keywords" content="線上圖片轉換, 圖片線上轉換, 免費圖片轉換, 圖片格式轉換, 圖片轉檔, 線上轉圖, WebP 轉 JPG, PNG 轉 WebP, HEIC 轉 JPG, AVIF 轉換, ICO 製作, SVG 轉換, 批次轉檔, 圖片壓縮, 本地轉檔, Switch Image, online image converter, image converter" />
   <meta name="author" content="Bruce Yang" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
   <meta name="application-name" content="Switch Image" />
@@ -16,6 +16,7 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#080e1a" media="(prefers-color-scheme: dark)" />
+  <link rel="canonical" href="https://switchimage.stack-base.com/" />
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website" />
@@ -24,18 +25,19 @@
   <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:locale:alternate" content="ja_JP" />
   <meta property="og:locale:alternate" content="es_ES" />
-  <meta property="og:title" content="Switch Image ⇄ 萬能圖片格式極速互轉" />
-  <meta property="og:description" content="支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批量互轉。100% 瀏覽器本地運算、四國語言、純淨無廣告、免學習秒上手。" />
-  <meta property="og:image" content="./assets/brand/icon-512.png" />
+  <meta property="og:url" content="https://switchimage.stack-base.com/" />
+  <meta property="og:title" content="Switch Image｜免費線上圖片轉換工具" />
+  <meta property="og:description" content="線上轉換 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 圖片，支援批次轉檔、壓縮、裁切與浮水印，全程免上傳。" />
+  <meta property="og:image" content="https://switchimage.stack-base.com/assets/brand/icon-512.png" />
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
   <meta property="og:image:alt" content="Switch Image Logo" />
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Switch Image ⇄ 萬能圖片格式極速互轉" />
-  <meta name="twitter:description" content="支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批量互轉。100% 瀏覽器本地運算、免登入、純淨無廣告。" />
-  <meta name="twitter:image" content="./assets/brand/icon-512.png" />
+  <meta name="twitter:title" content="Switch Image｜免費線上圖片轉換工具" />
+  <meta name="twitter:description" content="線上轉換 9 種圖片格式，支援批次轉檔、壓縮、裁切與浮水印；100% 瀏覽器本地處理，免上傳、免登入。" />
+  <meta name="twitter:image" content="https://switchimage.stack-base.com/assets/brand/icon-512.png" />
   <meta name="twitter:image:alt" content="Switch Image Logo" />
 
   <!-- Structured Data (JSON-LD WebApplication) -->
@@ -44,9 +46,10 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Switch Image",
-      "alternateName": "Switch Image 萬能圖片格式極速互轉",
-      "description": "100% 瀏覽器本地運算的萬能圖片格式極速互轉工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次互轉、壓縮、縮放、重命名與浮水印。",
-      "image": "./assets/brand/icon-512.png",
+      "alternateName": "Switch Image 免費線上圖片轉換工具",
+      "url": "https://switchimage.stack-base.com/",
+      "description": "免費線上圖片轉換工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次互轉、壓縮、裁切、重命名與浮水印，圖片全程在瀏覽器本地處理。",
+      "image": "https://switchimage.stack-base.com/assets/brand/icon-512.png",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Any",
       "browserRequirements": "Requires HTML5 Canvas and JavaScript",
@@ -161,10 +164,10 @@
       <h1 class="hero-title">
         <span class="hero-brand-repeat">Switch Image</span>
         <img class="ui-icon hero-swap-icon" src="./assets/icons/swap.svg" alt="" width="30" height="30" aria-hidden="true" />
-        <span data-i18n="hero.titleMain">萬能圖片格式極速互轉</span>
+        <span data-i18n="hero.titleMain">免費線上圖片轉換工具</span>
       </h1>
       <p class="hero-subtitle" data-i18n-html="hero.subtitleHtml">
-        支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、HEIC 互轉。<strong>選格式 → 拖進圖片 → 立即下載</strong><span class="hero-sub-extra">，檔案完全不經伺服器</span>。
+        線上轉換 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、HEIC 圖片。<strong>選格式 → 拖進圖片 → 立即下載</strong><span class="hero-sub-extra">，檔案完全不經伺服器</span>。
       </p>
       <div class="trust-strip" data-i18n-aria="trust.aria" aria-label="四大承諾">
         <span class="trust-pill" data-i18n-title="trust.fastTip" title="拖拉即轉，百張圖片秒級處理、一鍵 ZIP 打包">
