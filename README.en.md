@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="./assets/brand/logo.svg" alt="Switch Image Logo" width="88" height="88" />
+<a href="https://switchimage.stack-base.com">
+  <img src="./assets/brand/readme-banner.png" alt="Switch Image Online Image Converter" width="100%" />
+</a>
 
 # Switch Image
 
