@@ -203,22 +203,24 @@ Switch-Image/
 
 ## 🌐 部署指南
 
-全站資源均採用相對路徑（`./`），無需修改設定即可部署至根網域或子路徑（如 `https://<user>.github.io/<repo>/`）。
+全站資源均採用相對路徑（`./`），可部署至根網域、GitHub Pages 子路徑或其他靜態託管平台，無需建置指令。
 
-### GitHub Pages（GitHub Actions 自動部署，推薦）
+### 目前正式部署
 
-1. 將專案推送至 GitHub Repository 的 `main` 分支：
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: initial Switch Image release"
-   git branch -M main
-   git remote add origin https://github.com/bruce-yang-422/Switch-Image.git
-   git push -u origin main
-   ```
-2. 前往 Repository 的 **Settings → Pages → Build and deployment**。
-3. 將 **Source** 設為 **GitHub Actions**。
-4. 後續每次推送至 `main` 分支，[`.github/workflows/deploy-pages.yml`](./.github/workflows/deploy-pages.yml) 會自動觸發部署，且 `404.html` 會自動作為站台 404 頁面生效。
+- 正式網站：<https://switchimage.stack-base.com>
+- 原始碼：<https://github.com/bruce-yang-422/Switch-Image>
+- 託管平台：GitHub Pages
+- 部署來源：`main` 分支
+- 自動部署：[`.github/workflows/deploy-pages.yml`](./.github/workflows/deploy-pages.yml)
+- 自訂網域：由 [`CNAME`](./CNAME) 設定
+
+每次推送至 `main` 後，GitHub Actions 會自動部署最新版網站，`404.html` 則作為自訂錯誤頁面。
+
+### 部署自己的 Fork
+
+1. Fork 此 repository，並在 Fork 的 **Settings → Pages → Build and deployment** 將 **Source** 設為 **GitHub Actions**。
+2. 若使用 GitHub Pages 預設網址，請移除或修改 `CNAME`；若使用自訂網域，請將 `CNAME` 改成自己的網域。
+3. 推送至 Fork 的 `main` 分支，即會透過內建 workflow 自動部署。
 
 ### 其他靜態託管平台
 

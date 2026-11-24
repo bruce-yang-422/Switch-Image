@@ -203,22 +203,24 @@ Formats, presets, size templates, and locales are modular and easy to extend:
 
 ## 🌐 Deployment
 
-All asset paths are strictly relative (`./`), so Switch Image works seamlessly on custom domains and subpaths (e.g., `https://<user>.github.io/<repo>/`).
+All asset paths are relative (`./`), so Switch Image can be hosted at a root domain, a GitHub Pages subpath, or another static hosting service without a build command.
 
-### GitHub Pages via GitHub Actions (Recommended)
+### Current Production Deployment
 
-1. Push the repository to the `main` branch on GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: initial Switch Image release"
-   git branch -M main
-   git remote add origin https://github.com/bruce-yang-422/Switch-Image.git
-   git push -u origin main
-   ```
-2. Navigate to **Settings → Pages → Build and deployment**.
-3. Set **Source** to **GitHub Actions**.
-4. Every push to `main` automatically deploys via [`.github/workflows/deploy-pages.yml`](./.github/workflows/deploy-pages.yml), with `404.html` automatically served for missing routes.
+- Live website: <https://switchimage.stack-base.com>
+- Source repository: <https://github.com/bruce-yang-422/Switch-Image>
+- Hosting: GitHub Pages
+- Deployment branch: `main`
+- Workflow: [`.github/workflows/deploy-pages.yml`](./.github/workflows/deploy-pages.yml)
+- Custom domain: configured through [`CNAME`](./CNAME)
+
+Every push to `main` automatically deploys the latest site through GitHub Actions. The included `404.html` provides the custom error page.
+
+### Deploy Your Own Fork
+
+1. Fork this repository, then set **Settings → Pages → Build and deployment → Source** to **GitHub Actions** in your fork.
+2. Remove or update `CNAME` when using the default GitHub Pages URL; replace it with your own domain when using a custom domain.
+3. Push to your fork's `main` branch to deploy automatically with the included workflow.
 
 ### Other Static Hosts
 
