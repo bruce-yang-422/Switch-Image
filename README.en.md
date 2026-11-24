@@ -44,7 +44,7 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 
 ## Overview
 
-**Switch Image** is a pure client-side, zero-build static web application crafted for developers, designers, e-commerce teams, and content creators. Built with modular vanilla HTML, CSS, and JavaScript, it performs decoding, resizing, watermarking, multi-format encoding, and ZIP archiving entirely inside your browser—combining native speed with strict privacy.
+**Switch Image** is a pure client-side, zero-build static web application crafted for developers, designers, e-commerce teams, and content creators. Its modular vanilla HTML, CSS, and JavaScript architecture requires no package installation. All image processing and ZIP creation run locally in the browser; fallback HEIC/AVIF codec modules are loaded on demand only when native browser support is unavailable.
 
 ---
 
@@ -64,7 +64,7 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
   - Mobile keeps branding & intro within ~30% of the viewport so the core converter occupies 70%+ above the fold; language, theme, tips, and the 9-format matrix live in a single bottom sheet.
   - Desktop surfaces language and 3-mode icon theme controls directly in the topbar, opens an anchored About popover right below the `info` icon, and displays a borderless info footer—ensuring every control appears in exactly one place.
 - **Offline-Ready PWA & OS-Tailored Install Experience**:
-  - Ships with a relative-path Service Worker (`sw.js`) and full `manifest.json` for genuine offline image conversion.
+  - Ships with a relative-path Service Worker (`sw.js`) and full `manifest.json` for offline access to cached core conversion features. Browsers without native HEIC/AVIF support still need a network connection the first time a fallback codec is loaded.
   - **Gentle First-Visit Prompt**: Asks once on first visit via an unobtrusive floating corner card with platform-native terminology (Windows Desktop App, Mac App / Safari Add to Dock, iPhone/iPad Add to Home Screen, Android Home Screen, Linux Desktop) across all 4 languages.
   - **Low-Key Persistent Entry**: Quiet install entry tucked into the desktop footer or mobile bottom sheet when not yet installed, automatically hidden in standalone PWA mode.
 - **Unified Design System & Built-In SEO**: Concentric rounded corners, `4px / 8px` spacing scale, external duotone SVG icons & illustrations, plus complete Open Graph, Twitter Card, `WebApplication` JSON-LD structured data, `<noscript>` fallback, and `robots.txt`.
@@ -112,18 +112,20 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 
 ## 🚀 Quick Start
 
-Switch Image requires **no build step, no Node toolchain, and no package installation**.
+### Option 1: Use the Live App (Recommended)
 
-### Option 1: Open Directly (Offline `file://` Mode)
+Open **<https://switchimage.stack-base.com>**, select an output format, and drop in your images. No account, sign-in, or file upload is required.
+
+### Option 2: Run Locally
+
+No build step or dependency installation is required:
 
 ```bash
 git clone https://github.com/bruce-yang-422/Switch-Image.git
 cd Switch-Image
 ```
 
-Double-click `index.html` to run directly in your browser. Built-in fallback configs in `js/config/defaults.js` ensure full functionality over `file://`.
-
-### Option 2: Run a Local Static Server (Recommended for Development)
+Start any static server:
 
 ```bash
 # Node.js
@@ -136,17 +138,17 @@ python -m http.server 8080
 php -S localhost:8080
 ```
 
-Then open `http://localhost:8080` in your browser.
+Open the local URL printed by the command (`http://localhost:8080` for the Python and PHP examples). You can also double-click `index.html` to use the embedded fallback configuration in `file://` mode, but PWA installation, Service Workers, and some HEIC/AVIF fallback behavior require HTTP(S) and network access.
 
 ---
 
 ## 📁 Architecture & Project Structure
 
-Clean separation of concerns across markup, CSS design tokens, JSON configurations, external SVG assets, i18n, and codec modules (`index.html` and `404.html` contain **zero inline CSS, JS, or SVG**):
+Markup, CSS design tokens, JSON configuration, SVG assets, i18n, and codec modules remain cleanly separated. Neither `index.html` nor `404.html` contains inline CSS, executable JavaScript, or SVG; `index.html` only embeds the JSON-LD structured data required for SEO:
 
 ```text
 Switch-Image/
-├── index.html                           # Entry HTML (full SEO Meta & JSON-LD, zero inline CSS / scripts / SVG)
+├── index.html                           # Entry HTML (SEO Meta / JSON-LD; no inline executable CSS / JS / SVG)
 ├── 404.html                             # Custom 404 page (GitHub Pages, i18n & 3-mode theme ready)
 ├── robots.txt                           # Search crawler directives
 ├── LICENSE                              # MIT License (Copyright © Bruce Yang)

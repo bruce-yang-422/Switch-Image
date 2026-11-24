@@ -44,7 +44,7 @@
 
 ## 簡介
 
-**Switch Image** 是一個專為開發者、設計師、電商營運與內容創作者打造的純前端靜態圖像處理工作台。全站採用零依賴、免編譯（Zero-Build）的模組化原生 HTML / CSS / JavaScript 架構，所有轉檔、量化、封裝與 ZIP 打包皆於瀏覽器本地完成，兼顧極致速度與完整隱私。
+**Switch Image** 是一個專為開發者、設計師、電商營運與內容創作者打造的純前端靜態圖像處理工作台。全站採用免建置（Zero-Build）、免安裝套件的模組化原生 HTML / CSS / JavaScript 架構；所有圖片處理與 ZIP 打包皆於瀏覽器本地完成，僅在瀏覽器缺少 HEIC／AVIF 原生能力時按需載入備援編解碼模組。
 
 ---
 
@@ -64,7 +64,7 @@
   - 手機端頂部品牌與介紹精簡控制在首屏約 30% 內，70% 以上保留給核心轉檔工作台；語言、主題、使用小撇步與 9 大格式能力整合至底部抽屜（Bottom Sheet）。
   - PC 端由導覽列直接切換語言與三態主題，`info` 圖示正下方展開浮動網站資訊 Popover，底部呈現無框頁尾，同一功能絕不重複出現。
 - **PWA 離線應用與跨平台客製安裝引導**：
-  - 內建 Service Worker（`sw.js`）與完整 `manifest.json`，安裝後即可完全離線使用。
+  - 內建 Service Worker（`sw.js`）與完整 `manifest.json`，安裝後可離線使用已快取的核心轉檔功能；缺少原生支援的 HEIC／AVIF 備援模組首次載入時仍需網路。
   - **首次造訪溫和提示**：僅於首次造訪時於角落低調詢問安裝，並依作業系統與瀏覽器客製對應說法（Windows 桌面版、Mac 應用／Safari 加入 Dock、iPhone/iPad 加入主畫面、Android 手機主畫面、Linux 桌面版），且同步四國語系。
   - **低調常駐入口**：未安裝時僅於 PC 頁尾或手機底部設定抽屜提供低調入口，不干擾主工作台，安裝完成後自動隱藏。
 - **統一視覺系統與 SEO 優化**：同心圓弧角（Concentric Radii）、`4px / 8px` 間距規範、獨立圓角雙色 SVG 圖示／插畫；內建 Open Graph、Twitter Card、`WebApplication` JSON-LD 結構化資料、`<noscript>` 友善提示與 `robots.txt`。
@@ -112,18 +112,20 @@
 
 ## 🚀 快速開始
 
-本專案完全 **Zero-Build**，無需安裝任何套件即可運行。
+### 方式一：直接線上使用（推薦）
 
-### 方式一：直接本機開啟（完全離線）
+開啟 **<https://switchimage.stack-base.com>**，選擇輸出格式後拖入圖片即可轉換。無需註冊、登入或上傳檔案。
+
+### 方式二：在本機執行
+
+本專案無需建置或安裝相依套件：
 
 ```bash
 git clone https://github.com/bruce-yang-422/Switch-Image.git
 cd Switch-Image
 ```
 
-直接雙擊 `index.html` 即可透過 `file://` 協議使用（系統會自動載入 `js/config/defaults.js` 作為離線設定備援）。
-
-### 方式二：啟動本機靜態伺服器（推薦用於開發與即時讀取 JSON）
+啟動任一靜態伺服器：
 
 ```bash
 # Node.js
@@ -136,17 +138,17 @@ python -m http.server 8080
 php -S localhost:8080
 ```
 
-啟動後於瀏覽器開啟 `http://localhost:8080` 即可預覽。
+啟動後於瀏覽器開啟終端機顯示的本機網址（Python／PHP 範例為 `http://localhost:8080`）。也可直接雙擊 `index.html` 以 `file://` 模式使用內建備援設定，但 PWA 安裝、Service Worker 與部分 HEIC／AVIF 備援功能需要 HTTP(S) 與網路環境。
 
 ---
 
 ## 📁 專案架構
 
-嚴格分離結構（HTML）、設計系統（CSS）、設定資料（JSON）、視覺資產（SVG）與編解碼／多語核心（JS），且 `index.html` 與 `404.html` 均維持**零行內 CSS / JS / SVG**：
+嚴格分離結構（HTML）、設計系統（CSS）、設定資料（JSON）、視覺資產（SVG）與編解碼／多語核心（JS）；`index.html` 與 `404.html` 均不含行內 CSS、可執行 JavaScript 或 SVG（`index.html` 僅內嵌 SEO 所需的 JSON-LD 結構化資料）：
 
 ```text
 Switch-Image/
-├── index.html                           # 主入口頁面（含完整 SEO Meta / JSON-LD，零行內 CSS / 腳本 / SVG）
+├── index.html                           # 主入口頁面（SEO Meta / JSON-LD，無行內可執行 CSS / JS / SVG）
 ├── 404.html                             # 自訂 404 頁面（支援 GitHub Pages、多語系與三態主題）
 ├── robots.txt                           # 搜尋引擎爬蟲索引設定
 ├── LICENSE                              # MIT 開源授權條款（Copyright © Bruce Yang）
