@@ -20,12 +20,12 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/Version-v0.1.0-2563eb?style=flat-square" alt="Version v0.1.0" />
+  <img src="https://img.shields.io/badge/Version-v0.1.1-2563eb?style=flat-square" alt="Version v0.1.1" />
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Privacy-100%25%20Client--Side-10b981?style=flat-square" alt="100% Client-Side" />
   <img src="https://img.shields.io/badge/i18n-繁中%20%7C%20EN%20%7C%20日本語%20%7C%20ES-06b6d4?style=flat-square" alt="4 Languages" />
   <img src="https://img.shields.io/badge/Formats-9%20Image%20Codecs-6366f1?style=flat-square" alt="9 Image Codecs" />
-  <img src="https://img.shields.io/badge/Deploy-GitHub%20Pages%20Ready-0f172a?style=flat-square&logo=github" alt="GitHub Pages Ready" />
+  <a href="https://switchimage.stack-base.com"><img src="https://img.shields.io/badge/Website-Live-0f172a?style=flat-square&logo=githubpages" alt="Website Live" /></a>
 </p>
 
 <p>
@@ -117,8 +117,8 @@ Switch Image requires **no build step, no Node toolchain, and no package install
 ### Option 1: Open Directly (Offline `file://` Mode)
 
 ```bash
-git clone https://github.com/<your-username>/switchimage.git
-cd switchimage
+git clone https://github.com/bruce-yang-422/Switch-Image.git
+cd Switch-Image
 ```
 
 Double-click `index.html` to run directly in your browser. Built-in fallback configs in `js/config/defaults.js` ensure full functionality over `file://`.
@@ -145,7 +145,7 @@ Then open `http://localhost:8080` in your browser.
 Clean separation of concerns across markup, CSS design tokens, JSON configurations, external SVG assets, i18n, and codec modules (`index.html` and `404.html` contain **zero inline CSS, JS, or SVG**):
 
 ```text
-switchimage/
+Switch-Image/
 ├── index.html                           # Entry HTML (full SEO Meta & JSON-LD, zero inline CSS / scripts / SVG)
 ├── 404.html                             # Custom 404 page (GitHub Pages, i18n & 3-mode theme ready)
 ├── robots.txt                           # Search crawler directives
@@ -154,12 +154,13 @@ switchimage/
 ├── README.en.md                         # English Documentation
 ├── manifest.json                        # PWA Web App Manifest
 ├── sw.js                                # Service Worker (offline asset caching & standalone PWA)
+├── CNAME                                # GitHub Pages custom domain
 ├── .nojekyll                            # Disables Jekyll processing on GitHub Pages
 ├── .github/
 │   └── workflows/
 │       └── deploy-pages.yml             # GitHub Actions Pages deployment workflow
 ├── assets/
-│   ├── brand/                           # Brand identity (logo.svg, icon-512.png)
+│   ├── brand/                           # Brand identity, PWA icon, SEO cover & README banner
 │   ├── favicon/                         # Browser & device icons (favicon.ico, apple-touch-icon.png)
 │   ├── icons/                           # External rounded duotone UI SVG icons
 │   └── illustrations/                   # Custom SVG dropzone & 404 illustrations
@@ -210,9 +211,9 @@ All asset paths are strictly relative (`./`), so Switch Image works seamlessly o
    ```bash
    git init
    git add .
-   git commit -m "feat: initial Switch Image v0.1.0 release"
+   git commit -m "feat: initial Switch Image release"
    git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-repo>.git
+   git remote add origin https://github.com/bruce-yang-422/Switch-Image.git
    git push -u origin main
    ```
 2. Navigate to **Settings → Pages → Build and deployment**.
@@ -239,17 +240,6 @@ Works on all modern evergreen browsers (**Chrome / Edge 90+**, **Firefox 90+**, 
 
 ---
 
-## 🤝 Contributing
-
-Issues, platform size template suggestions, locale improvements, and Pull Requests are welcome:
-
-1. Fork the repository and create a feature branch (`git checkout -b feat/your-feature`).
-2. Keep the zero-build static architecture and clear separation of HTML / CSS / JS / JSON / SVG.
-3. Verify light / dark / system themes, all 4 languages, and desktop & mobile viewports.
-4. Open a Pull Request describing your changes.
-
----
-
 ## 📄 License
 
 This project is licensed under the **[MIT License](./LICENSE)** — Copyright © 2026 **Bruce Yang**. See the [`LICENSE`](./LICENSE) file for details.
@@ -257,5 +247,5 @@ This project is licensed under the **[MIT License](./LICENSE)** — Copyright ©
 ---
 
 <div align="center">
-  <sub>Switch Image v0.1.0 &bull; Built with pure Web Standards — HTML5 Canvas, Modular CSS Design Tokens &amp; Vanilla JavaScript.</sub>
+  <sub>Switch Image v0.1.1 &bull; Built with pure Web Standards — HTML5 Canvas, Modular CSS Design Tokens &amp; Vanilla JavaScript.</sub>
 </div>

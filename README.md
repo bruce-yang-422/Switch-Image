@@ -20,12 +20,12 @@
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/Version-v0.1.0-2563eb?style=flat-square" alt="Version v0.1.0" />
+  <img src="https://img.shields.io/badge/Version-v0.1.1-2563eb?style=flat-square" alt="Version v0.1.1" />
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Privacy-100%25%20Client--Side-10b981?style=flat-square" alt="100% Client-Side" />
   <img src="https://img.shields.io/badge/i18n-繁中%20%7C%20EN%20%7C%20日本語%20%7C%20ES-06b6d4?style=flat-square" alt="4 Languages" />
   <img src="https://img.shields.io/badge/Formats-9%20Image%20Codecs-6366f1?style=flat-square" alt="9 Image Codecs" />
-  <img src="https://img.shields.io/badge/Deploy-GitHub%20Pages%20Ready-0f172a?style=flat-square&logo=github" alt="GitHub Pages Ready" />
+  <a href="https://switchimage.stack-base.com"><img src="https://img.shields.io/badge/Website-Live-0f172a?style=flat-square&logo=githubpages" alt="Website Live" /></a>
 </p>
 
 <p>
@@ -117,8 +117,8 @@
 ### 方式一：直接本機開啟（完全離線）
 
 ```bash
-git clone https://github.com/<your-username>/switchimage.git
-cd switchimage
+git clone https://github.com/bruce-yang-422/Switch-Image.git
+cd Switch-Image
 ```
 
 直接雙擊 `index.html` 即可透過 `file://` 協議使用（系統會自動載入 `js/config/defaults.js` 作為離線設定備援）。
@@ -145,7 +145,7 @@ php -S localhost:8080
 嚴格分離結構（HTML）、設計系統（CSS）、設定資料（JSON）、視覺資產（SVG）與編解碼／多語核心（JS），且 `index.html` 與 `404.html` 均維持**零行內 CSS / JS / SVG**：
 
 ```text
-switchimage/
+Switch-Image/
 ├── index.html                           # 主入口頁面（含完整 SEO Meta / JSON-LD，零行內 CSS / 腳本 / SVG）
 ├── 404.html                             # 自訂 404 頁面（支援 GitHub Pages、多語系與三態主題）
 ├── robots.txt                           # 搜尋引擎爬蟲索引設定
@@ -154,12 +154,13 @@ switchimage/
 ├── README.en.md                         # English Documentation
 ├── manifest.json                        # PWA Web App Manifest
 ├── sw.js                                # Service Worker（離線快取與獨立應用支援）
+├── CNAME                                # GitHub Pages 自訂網域設定
 ├── .nojekyll                            # 停用 GitHub Pages Jekyll 建置
 ├── .github/
 │   └── workflows/
 │       └── deploy-pages.yml             # GitHub Actions 自動部署設定
 ├── assets/
-│   ├── brand/                           # 品牌識別（logo.svg、icon-512.png）
+│   ├── brand/                           # 品牌識別、PWA 圖示、SEO 分享圖與 README 橫幅
 │   ├── favicon/                         # 裝置與分頁圖示（favicon.ico、apple-touch-icon.png）
 │   ├── icons/                           # 獨立圓角雙色 UI SVG 圖示（含語言、三態主題、導覽）
 │   └── illustrations/                   # 拖放區與 404 頁客製 SVG 插畫
@@ -210,9 +211,9 @@ switchimage/
    ```bash
    git init
    git add .
-   git commit -m "feat: initial Switch Image v0.1.0 release"
+   git commit -m "feat: initial Switch Image release"
    git branch -M main
-   git remote add origin https://github.com/<your-username>/<your-repo>.git
+   git remote add origin https://github.com/bruce-yang-422/Switch-Image.git
    git push -u origin main
    ```
 2. 前往 Repository 的 **Settings → Pages → Build and deployment**。
@@ -239,17 +240,6 @@ switchimage/
 
 ---
 
-## 🤝 參與貢獻
-
-歡迎透過 Issue 回報問題、提出新平台尺寸模板或語系翻譯建議，或直接提交 Pull Request：
-
-1. Fork 本專案並建立功能分支（`git checkout -b feat/your-feature`）
-2. 保持 Zero-Build 零編譯原則與模組化檔案職責分離
-3. 確認淺色／深色／跟隨系統三態主題、四國語言與桌面／行動裝置版面正常顯示
-4. 提交變更並開啟 Pull Request
-
----
-
 ## 📄 授權條款
 
 本專案採用 **[MIT License](./LICENSE)** 開源授權 — Copyright © 2026 **Bruce Yang**。詳情請參閱 [`LICENSE`](./LICENSE) 檔案。
@@ -257,5 +247,5 @@ switchimage/
 ---
 
 <div align="center">
-  <sub>Switch Image v0.1.0 &bull; Built with pure Web Standards — HTML5 Canvas, Modular CSS Design Tokens &amp; Vanilla JavaScript.</sub>
+  <sub>Switch Image v0.1.1 &bull; Built with pure Web Standards — HTML5 Canvas, Modular CSS Design Tokens &amp; Vanilla JavaScript.</sub>
 </div>
