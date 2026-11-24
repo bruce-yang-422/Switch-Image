@@ -14,6 +14,10 @@
 </p>
 
 <p>
+  <strong>🌐 <a href="https://switchimage.stack-base.com">線上使用 Switch Image</a></strong>
+</p>
+
+<p>
   <img src="https://img.shields.io/badge/Version-v0.1.0-2563eb?style=flat-square" alt="Version v0.1.0" />
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Privacy-100%25%20Client--Side-10b981?style=flat-square" alt="100% Client-Side" />
