@@ -8,7 +8,7 @@
 
 **Lightning-Fast Universal Image Converter — 100% Local in Your Browser**
 
-Batch convert, compress, resize, rename, and watermark images across **WebP, JPG, PNG, AVIF, GIF, ICO, SVG, BMP, and HEIC**.<br />
+Batch convert, compress, resize, rename, and watermark images locally across **14 input families and 9 output formats**, including JPEG XL import and export, plus HEIC, PSD, TIFF, TGA, and RAW preview input.<br />
 Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free &bull; Your files never leave your device.
 
 <p>
@@ -24,7 +24,7 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Privacy-100%25%20Client--Side-10b981?style=flat-square" alt="100% Client-Side" />
   <img src="https://img.shields.io/badge/i18n-繁中%20%7C%20EN%20%7C%20日本語%20%7C%20ES-06b6d4?style=flat-square" alt="4 Languages" />
-  <img src="https://img.shields.io/badge/Formats-9%20Image%20Codecs-6366f1?style=flat-square" alt="9 Image Codecs" />
+  <img src="https://img.shields.io/badge/Formats-14%20Inputs%20%7C%209%20Outputs-6366f1?style=flat-square" alt="14 input families and 9 output formats" />
   <a href="https://switchimage.stack-base.com"><img src="https://img.shields.io/badge/Website-Live-0f172a?style=flat-square&logo=githubpages" alt="Website Live" /></a>
 </p>
 
@@ -44,7 +44,7 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 
 ## Overview
 
-**Switch Image** is a pure client-side, zero-build static web application crafted for developers, designers, e-commerce teams, and content creators. Its modular vanilla HTML, CSS, and JavaScript architecture requires no package installation. All image processing and ZIP creation run locally in the browser; fallback HEIC/AVIF codec modules are loaded on demand only when native browser support is unavailable.
+**Switch Image** is a pure client-side, zero-build static web application crafted for developers, designers, e-commerce teams, and content creators. Its modular vanilla HTML, CSS, and JavaScript architecture requires no package installation. All image processing and ZIP creation run locally in the browser. Additional codecs load on demand.
 
 ---
 
@@ -56,15 +56,16 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
   - **1 image**: Primary CTA downloads the converted file directly without wrapping it in a ZIP archive.
   - **2+ images**: Automatically switches to one-click **ZIP Archive (`SwitchImage_Batch.zip`)**, alongside sequential individual downloads.
 - **Per-Item Format Override**: Change the output format of individual images right inside the results queue.
+- **Mobile Format Picker**: Shows WebP, PNG, JPG, and AVIF by default. Use **All formats** to show all nine outputs.
 
 ### Cross-Device Craft & Progressive Disclosure UI
 - **Built-in 4-Language i18n**: Instant switching across **Traditional Chinese (繁體中文), English, Japanese (日本語), and Spanish (Español)**—covering all UI controls, format descriptions, 45 size templates, modals, toasts, and `404.html`, with auto-detection and `localStorage` persistence.
 - **3-Mode Icon Theme Switcher**: Tactile icon-based **Light / Dark / System** segmented control (☀ / 🌙 / 🖥) with live `prefers-color-scheme` sync.
 - **Tool-First, Zero-Duplication Responsive Layout**:
-  - Mobile keeps branding & intro within ~30% of the viewport so the core converter occupies 70%+ above the fold; language, theme, tips, and the 9-format matrix live in a single bottom sheet.
+  - Mobile keeps branding & intro within ~30% of the viewport so the core converter occupies 70%+ above the fold; language, theme, tips, and the 14-format matrix live in a single bottom sheet.
   - Desktop surfaces language and 3-mode icon theme controls directly in the topbar, opens an anchored About popover right below the `info` icon, and displays a borderless info footer—ensuring every control appears in exactly one place.
 - **Offline-Ready PWA & OS-Tailored Install Experience**:
-  - Ships with a relative-path Service Worker (`sw.js`) and full `manifest.json` for offline access to cached core conversion features. Browsers without native HEIC/AVIF support still need a network connection the first time a fallback codec is loaded.
+  - Ships with a relative-path Service Worker (`sw.js`) and full `manifest.json` for offline access to cached core conversion features. On-demand codecs need a network connection on first load.
   - **Gentle First-Visit Prompt**: Asks once on first visit via an unobtrusive floating corner card with platform-native terminology (Windows Desktop App, Mac App / Safari Add to Dock, iPhone/iPad Add to Home Screen, Android Home Screen, Linux Desktop) across all 4 languages.
   - **Low-Key Persistent Entry**: Quiet install entry tucked into the desktop footer or mobile bottom sheet when not yet installed, automatically hidden in standalone PWA mode.
 - **Unified Design System & Built-In SEO**: Concentric rounded corners, `4px / 8px` spacing scale, external duotone SVG icons & illustrations, plus complete Open Graph, Twitter Card, `WebApplication` JSON-LD structured data, `<noscript>` fallback, and `robots.txt`.
@@ -74,7 +75,9 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 - **Clean Output Lightbox**: Click any thumbnail to inspect the converted image (crop, background fill, watermark) at full viewport scale, and click the image to toggle 100% actual pixel zoom.
 - **Multi-Select ICO Size Chips**: Freely toggle any combination of `16 / 32 / 48 / 64 / 128 / 256px` to pack into a single `.ico` file.
 - **7 Quick Presets**: One-click presets for WebP optimization, ultra-compact AVIF, universal JPG, lossless PNG, multi-size favicon ICO, SVG vector tracing, and 1920px social sharing.
+- **Proportional Size Limits**: Choose one cap for width, height, longest edge, or shortest edge. Smaller images stay at their original size.
 - **45 Cross-Platform Size Templates**: Filterable & searchable presets paired with **Contain (aspect fit)**, **Pad (centered canvas with fill)**, and **Cover (center crop)** resize modes.
+- **Template Filename Suffixes**: Combine an English template name in snake_case, dimensions, and a 1–6 digit sequence, such as `_shopee_standard_square_800x800_001`. The controls follow the site language.
 - **Batch Renamer**: Custom prefix, suffix, unified base filename, and zero-padded sequential numbering with live preview and OS-safe filename sanitization.
 - **Custom Text & Logo Watermarks**: Proportional font sizing, opacity, angle, transparent PNG/SVG logo overlays, and 6 placements including **full-canvas diagonal tiling**.
 
@@ -100,7 +103,7 @@ RAW, DNG, CR2, CR3, NEF, and ARW can convert embedded JPEG previews. The result 
 
 PSD, TIFF/TIF, JPEG XL, and TGA are input formats for preview and batch conversion. PSD uses the saved 8-bit composite. TIFF converts the first page of common 8-bit RGB/RGBA or 1-/8-bit grayscale files. TGA supports uncompressed and RLE true-color files. JPEG XL is also a still-image output format with adjustable quality, transparency, and an on-demand encoder.
 
-Open the app over HTTP(S) for worker-based decoding. The PSD, TIFF, and JPEG XL fallback decoders are fetched on demand, and files are processed locally. These inputs are limited to 128 MiB, 40 megapixels, and 16,383 pixels per side.
+Open the app over HTTP(S) for worker-based decoding. The PSD and TIFF decoders and JPEG XL encoder and fallback decoder are fetched on demand. Files are processed locally. PSD, TIFF, TGA, JPEG XL, and RAW-family inputs are limited to 128 MiB, 40 megapixels, and 16,383 pixels per side.
 
 | Format | Decode | Encode | Alpha | Engine &amp; Implementation Details |
 | :--- | :---: | :---: | :---: | :--- |
@@ -113,6 +116,11 @@ Open the app over HTTP(S) for worker-based decoding. The PSD, TIFF, and JPEG XL 
 | **SVG** | ✅ | ✅ Pure JS | ✅ | High-DPI SVG rasterization; raster-to-SVG supports both lossless embedded wrapper and pure vector color-region tracing |
 | **BMP** | ✅ | ✅ Pure JS | ❌ | Standard uncompressed 24-bit Windows BMP encoder |
 | **HEIC / HEIF** | ✅ | Convert out | ✅ | Native Safari decoding; loads `heic2any` on demand in Chromium/Firefox to convert to any output format |
+| **JPEG XL** | ✅ | ✅ WASM | ✅ | Still-image export with adjustable quality |
+| **PSD** | ✅ | Input only | ✅ | Saved 8-bit composite |
+| **TIFF / TIF** | ✅ | Input only | ✅ | First page of supported RGB, RGBA, or grayscale files |
+| **TGA** | ✅ | Input only | ✅ | Uncompressed or RLE true-color |
+| **RAW / DNG / CR2 / CR3 / NEF / ARW** | ✅ | Input only | — | Embedded JPEG preview |
 
 ---
 
@@ -144,7 +152,7 @@ python -m http.server 8080
 php -S localhost:8080
 ```
 
-Open the local URL printed by the command (`http://localhost:8080` for the Python and PHP examples). You can also double-click `index.html` to use the embedded fallback configuration in `file://` mode, but PWA installation, Service Workers, and some HEIC/AVIF fallback behavior require HTTP(S) and network access.
+Open the local URL printed by the command (`http://localhost:8080` for the Python and PHP examples). Double-clicking `index.html` opens `file://` mode with embedded settings for common formats. Use HTTP(S) for PWA installation, Service Workers, worker-based decoding, and JPEG XL encoding. On-demand codecs need a network connection on first load.
 
 ---
 
@@ -173,7 +181,7 @@ Switch-Image/
 │   ├── icons/                           # External rounded duotone UI SVG icons
 │   └── illustrations/                   # Custom SVG dropzone & 404 illustrations
 ├── data/
-│   ├── formats.json                     # 9 image format specs, MIME types, ICO/SVG options
+│   ├── formats.json                     # 14 input families and 9 output formats, MIME types, ICO/SVG options
 │   ├── presets.json                     # 7 quick format & quality presets
 │   └── ecommerce-templates.json         # 6 categories, 45 platform size templates
 ├── css/
@@ -186,7 +194,7 @@ Switch-Image/
 └── js/
     ├── config/defaults.js               # Offline fallback configs for file:// execution
     ├── utils/                           # formatters, renamer, folder-reader, download, zip-builder
-    ├── decoders/                        # image-decoder (with SVG normalization), heic-decoder
+    ├── decoders/                        # browser decoding, HEIC fallback, and professional codec worker
     ├── encoders/                        # canvas-encoder (with AVIF WASM fallback), gif / ico / svg / bmp encoders
     ├── core/                            # i18n (4 locales), capabilities, watermark, store, converter
     ├── ui/                              # theme, toast, settings-panel, advanced-tools, file-list, compare-modal, format-matrix, site-info-modal, pwa-install, error-page
@@ -201,7 +209,7 @@ Formats, presets, size templates, and locales are modular and easy to extend:
 
 | Task | File to Edit | Notes |
 | :--- | :--- | :--- |
-| Add or edit size templates | [`data/ecommerce-templates.json`](./data/ecommerce-templates.json) | Configure category, dimensions, resize mode (`contain` / `pad` / `cover`), format, and filename suffix |
+| Add or edit size templates | [`data/ecommerce-templates.json`](./data/ecommerce-templates.json) | Configure category, dimensions, resize mode (`contain` / `pad` / `cover`), and output format. Template-name suffixes use the English display names |
 | Customize quick presets | [`data/presets.json`](./data/presets.json) | Define one-click format, quality, and dimension profiles |
 | Adjust format defaults | [`data/formats.json`](./data/formats.json) | Modify default quality, ICO size bundles, or SVG export modes |
 | Add or edit UI languages | [`js/core/i18n.js`](./js/core/i18n.js) | Ships with `zh-Hant`, `en`, `ja`, and `es`; extend using the same key dictionary |
@@ -240,7 +248,7 @@ Deploy the repository root (`.`) directly to **Cloudflare Pages**, **Netlify**, 
 
 - **100% Client-Side Execution**: Image decoding, resizing, watermarking, format encoding, and ZIP creation all run strictly inside browser memory. No image data is ever transmitted to any server.
 - **Zero Tracking**: No analytics scripts, no tracking cookies, and no third-party ads.
-- **On-Demand Codec Loading**: PSD and TIFF use external JavaScript decoders. JPEG XL, AVIF, and HEIC load fallback codecs when needed.
+- **On-Demand Codec Loading**: PSD and TIFF decoding and JPEG XL encoding load codecs on demand. JPEG XL, AVIF, and HEIC also load fallback codecs when needed.
 
 ---
 

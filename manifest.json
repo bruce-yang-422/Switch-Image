@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Switch Image ⇄ 萬能圖片格式極速互轉",
   "short_name": "Switch Image",
-  "description": "100% 瀏覽器本地運算的萬能圖片格式互轉工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次轉換、壓縮、縮放、浮水印與離線使用。",
+  "description": "免費本地批次轉檔，支援 JPEG XL 雙向轉換及 HEIC、PSD、TIFF、TGA、RAW 預覽輸入。可縮放、壓縮與加浮水印。",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
