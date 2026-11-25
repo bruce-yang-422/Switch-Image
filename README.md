@@ -9,7 +9,7 @@
 **100% 瀏覽器本地運算的萬能圖片格式極速互轉工具**
 
 支援 **14 類輸入、9 種輸出**，提供本地批次轉檔、畫質壓縮、尺寸調整、重命名與浮水印。可讀取 HEIC、PSD、TIFF、TGA 與 RAW 預覽，並支援 JPEG XL 雙向轉換。<br />
-免建置（Zero-Build）・四國語言介面・三態主題切換・純淨無廣告・檔案絕不離開您的裝置。
+免建置（Zero-Build）・九種語言介面・三態主題切換・純淨無廣告・檔案絕不離開您的裝置。
 
 <p>
   <strong>繁體中文</strong> &nbsp;|&nbsp; <a href="./README.en.md">English</a>
@@ -23,7 +23,7 @@
   <img src="https://img.shields.io/badge/Version-v0.1.1-2563eb?style=flat-square" alt="Version v0.1.1" />
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Privacy-100%25%20Client--Side-10b981?style=flat-square" alt="100% Client-Side" />
-  <img src="https://img.shields.io/badge/i18n-繁中%20%7C%20EN%20%7C%20日本語%20%7C%20ES-06b6d4?style=flat-square" alt="4 Languages" />
+  <img src="https://img.shields.io/badge/i18n-9%20Languages-06b6d4?style=flat-square" alt="9 Languages" />
   <img src="https://img.shields.io/badge/Formats-14%20Inputs%20%7C%209%20Outputs-6366f1?style=flat-square" alt="14 input families and 9 output formats" />
   <a href="https://switchimage.stack-base.com"><img src="https://img.shields.io/badge/Website-Live-0f172a?style=flat-square&logo=githubpages" alt="Website Live" /></a>
 </p>
@@ -59,14 +59,14 @@
 - **手機格式選單**：預設顯示 WebP、PNG、JPG、AVIF，點「全部格式」即可展開九種輸出。
 
 ### 跨裝置質感設計與漸進式揭露（Progressive Disclosure）
-- **多國語言即時切換（4 語系）**：內建 **繁體中文、English、日本語、Español** 完整語系引擎（含所有格式標籤、45 組尺寸模板、彈窗、提示與 404 頁），自動偵測瀏覽器語系並持久化偏好。
+- **多國語言即時切換（9 語系）**：內建 **繁體中文、简体中文、English、日本語、한국어、ไทย、Bahasa Indonesia、Tiếng Việt、Español** 完整語系引擎（含所有格式標籤、45 組尺寸模板、彈窗、提示與 404 頁），自動偵測瀏覽器語系並持久化偏好。
 - **亮色／暗色／隨系統三態圖示切換**：PC 頂部與設定抽屜提供純圖示三段切換器（☀／🌙／🖥），即時監聽作業系統 `prefers-color-scheme` 變化。
 - **行動優先與零重複介面**：
   - 手機端頂部品牌與介紹精簡控制在首屏約 30% 內，70% 以上保留給核心轉檔工作台；語言、主題、使用小撇步與 14 類格式能力整合至底部抽屜（Bottom Sheet）。
   - PC 端由導覽列直接切換語言與三態主題，`info` 圖示正下方展開浮動網站資訊 Popover，底部呈現無框頁尾，同一功能絕不重複出現。
 - **PWA 離線應用與跨平台客製安裝引導**：
   - 內建 Service Worker（`sw.js`）與完整 `manifest.json`，安裝後可離線使用已快取的核心轉檔功能；按需下載的編解碼模組首次載入時需要網路。
-  - **首次造訪溫和提示**：僅於首次造訪時於角落低調詢問安裝，並依作業系統與瀏覽器客製對應說法（Windows 桌面版、Mac 應用／Safari 加入 Dock、iPhone/iPad 加入主畫面、Android 手機主畫面、Linux 桌面版），且同步四國語系。
+  - **首次造訪溫和提示**：僅於首次造訪時於角落低調詢問安裝，並依作業系統與瀏覽器客製對應說法（Windows 桌面版、Mac 應用／Safari 加入 Dock、iPhone/iPad 加入主畫面、Android 手機主畫面、Linux 桌面版），且同步九個語系。
   - **低調常駐入口**：未安裝時僅於 PC 頁尾或手機底部設定抽屜提供低調入口，不干擾主工作台，安裝完成後自動隱藏。
 - **統一視覺系統與 SEO 優化**：同心圓弧角（Concentric Radii）、`4px / 8px` 間距規範、獨立圓角雙色 SVG 圖示／插畫；內建 Open Graph、Twitter Card、`WebApplication` JSON-LD 結構化資料、`<noscript>` 友善提示與 `robots.txt`。
 - **自訂 404 頁面**：內建與全站風格一致的 `404.html`，支援 GitHub Pages 子路徑返回、多語系與三態主題同步。
@@ -196,7 +196,7 @@ Switch-Image/
     ├── utils/                           # formatters、renamer、folder-reader、download、zip-builder
     ├── decoders/                        # 瀏覽器解碼、HEIC 備援與專業格式背景處理
     ├── encoders/                        # canvas-encoder（含 AVIF WASM）、gif / ico / svg / bmp encoder
-    ├── core/                            # i18n（4 語系引擎）、capabilities、watermark、store、converter
+    ├── core/                            # i18n（9 語系引擎）、capabilities、watermark、store、converter
     ├── ui/                              # theme、toast、settings-panel、advanced-tools、file-list、compare-modal、format-matrix、site-info-modal、pwa-install、error-page
     └── app.js                           # 應用程式啟動與全域事件綁定
 ```
@@ -212,7 +212,7 @@ Switch-Image/
 | 新增／調整尺寸模板 | [`data/ecommerce-templates.json`](./data/ecommerce-templates.json) | 支援自訂分類、寬高、縮放模式（`contain` / `pad` / `cover`）、預設格式。模板名稱後綴取自英文模板名稱 |
 | 調整常用快速組合 | [`data/presets.json`](./data/presets.json) | 自訂一鍵套用的格式、畫質與最大尺寸限制 |
 | 修改格式預設畫質或選項 | [`data/formats.json`](./data/formats.json) | 調整預設品質、ICO 封裝尺寸與 SVG 模式選項 |
-| 擴充或修改介面語系 | [`js/core/i18n.js`](./js/core/i18n.js) | 內建 `zh-Hant`、`en`、`ja`、`es`，可依相同鍵值新增更多語系 |
+| 擴充或修改介面語系 | [`js/core/i18n.js`](./js/core/i18n.js) | 核心與 [擴充語系字典](./js/core/extended-locales.js) 使用相同的翻譯鍵值 |
 | 同步離線 `file://` 備援 | [`js/config/defaults.js`](./js/config/defaults.js) | 若需支援直接雙擊 `index.html` 離線讀取新資料，請同步更新此檔 |
 
 ---

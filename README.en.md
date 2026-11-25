@@ -9,7 +9,7 @@
 **Lightning-Fast Universal Image Converter — 100% Local in Your Browser**
 
 Batch convert, compress, resize, rename, and watermark images locally across **14 input families and 9 output formats**, including JPEG XL import and export, plus HEIC, PSD, TIFF, TGA, and RAW preview input.<br />
-Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free &bull; Your files never leave your device.
+Zero-Build &bull; 9 Languages &bull; Light / Dark / System Theme &bull; Ad-Free &bull; Your files never leave your device.
 
 <p>
   <a href="./README.md">繁體中文</a> &nbsp;|&nbsp; <strong>English</strong>
@@ -23,7 +23,7 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
   <img src="https://img.shields.io/badge/Version-v0.1.1-2563eb?style=flat-square" alt="Version v0.1.1" />
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-16a34a?style=flat-square" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Privacy-100%25%20Client--Side-10b981?style=flat-square" alt="100% Client-Side" />
-  <img src="https://img.shields.io/badge/i18n-繁中%20%7C%20EN%20%7C%20日本語%20%7C%20ES-06b6d4?style=flat-square" alt="4 Languages" />
+  <img src="https://img.shields.io/badge/i18n-9%20Languages-06b6d4?style=flat-square" alt="9 Languages" />
   <img src="https://img.shields.io/badge/Formats-14%20Inputs%20%7C%209%20Outputs-6366f1?style=flat-square" alt="14 input families and 9 output formats" />
   <a href="https://switchimage.stack-base.com"><img src="https://img.shields.io/badge/Website-Live-0f172a?style=flat-square&logo=githubpages" alt="Website Live" /></a>
 </p>
@@ -59,7 +59,7 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 - **Mobile Format Picker**: Shows WebP, PNG, JPG, and AVIF by default. Use **All formats** to show all nine outputs.
 
 ### Cross-Device Craft & Progressive Disclosure UI
-- **Built-in 4-Language i18n**: Instant switching across **Traditional Chinese (繁體中文), English, Japanese (日本語), and Spanish (Español)**—covering all UI controls, format descriptions, 45 size templates, modals, toasts, and `404.html`, with auto-detection and `localStorage` persistence.
+- **Built-in 9-Language i18n**: Instant switching across **Traditional Chinese, Simplified Chinese, English, Japanese, Korean, Thai, Indonesian, Vietnamese, and Spanish**—covering all UI controls, format descriptions, 45 size templates, modals, toasts, and `404.html`, with auto-detection and `localStorage` persistence.
 - **3-Mode Icon Theme Switcher**: Tactile icon-based **Light / Dark / System** segmented control (☀ / 🌙 / 🖥) with live `prefers-color-scheme` sync.
 - **Tool-First, Zero-Duplication Responsive Layout**:
   - Mobile keeps branding & intro within ~30% of the viewport so the core converter occupies 70%+ above the fold; language, theme, tips, and the 14-format matrix live in a single bottom sheet.
@@ -212,7 +212,7 @@ Formats, presets, size templates, and locales are modular and easy to extend:
 | Add or edit size templates | [`data/ecommerce-templates.json`](./data/ecommerce-templates.json) | Configure category, dimensions, resize mode (`contain` / `pad` / `cover`), and output format. Template-name suffixes use the English display names |
 | Customize quick presets | [`data/presets.json`](./data/presets.json) | Define one-click format, quality, and dimension profiles |
 | Adjust format defaults | [`data/formats.json`](./data/formats.json) | Modify default quality, ICO size bundles, or SVG export modes |
-| Add or edit UI languages | [`js/core/i18n.js`](./js/core/i18n.js) | Ships with `zh-Hant`, `en`, `ja`, and `es`; extend using the same key dictionary |
+| Add or edit UI languages | [`js/core/i18n.js`](./js/core/i18n.js) | The core and [extended locale dictionaries](./js/core/extended-locales.js) use the same translation keys |
 | Keep offline `file://` in sync | [`js/config/defaults.js`](./js/config/defaults.js) | Mirror JSON updates here if you rely on opening `index.html` without an HTTP server |
 
 ---

@@ -1,6 +1,6 @@
 /**
  * Internationalization (i18n) Module
- * Supports: Traditional Chinese (zh-Hant), English (en), Japanese (ja), Spanish (es).
+ * Supports nine languages with extended dictionaries loaded before this module.
  * Persists user preference in localStorage and updates static DOM + notifies dynamic UI modules.
  */
 (function (root) {
@@ -11,7 +11,12 @@
     { id: 'zh-Hant', label: '繁體中文', shortLabel: '繁中' },
     { id: 'en', label: 'English', shortLabel: 'EN' },
     { id: 'ja', label: '日本語', shortLabel: '日本語' },
-    { id: 'es', label: 'Español', shortLabel: 'ES' }
+    { id: 'es', label: 'Español', shortLabel: 'ES' },
+    { id: 'zh-Hans', label: '简体中文', shortLabel: '简中' },
+    { id: 'ko', label: '한국어', shortLabel: '한국어' },
+    { id: 'th', label: 'ไทย', shortLabel: 'ไทย' },
+    { id: 'id', label: 'Bahasa Indonesia', shortLabel: 'ID' },
+    { id: 'vi', label: 'Tiếng Việt', shortLabel: 'VI' }
   ];
 
   const MESSAGES = {
@@ -1267,21 +1272,31 @@
     }
   };
 
+  for (const [id, locale] of Object.entries(SI.extendedLocales || {})) {
+    MESSAGES[id] = locale.messages;
+    FORMAT_META[id] = locale.formats;
+    EXTRA_OPTIONS[id] = locale.options;
+    TEMPLATE_LABELS[id] = locale.templates;
+  }
+
   let currentLang = 'zh-Hant';
   const listeners = new Set();
 
   function detectInitialLang() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved && MESSAGES[saved]) return saved;
+      if (saved && Object.hasOwn(MESSAGES, saved)) return saved;
     } catch {
       // Ignore storage access errors
     }
     const nav = (navigator.language || '').toLowerCase();
-    if (nav.startsWith('ja')) return 'ja';
-    if (nav.startsWith('es')) return 'es';
-    if (nav.startsWith('en')) return 'en';
-    return 'zh-Hant';
+    const [language, ...subtags] = nav.split('-');
+    if (language === 'zh') {
+      if (subtags.includes('hant')) return 'zh-Hant';
+      const simplified = subtags.some(tag => ['hans', 'cn', 'sg'].includes(tag));
+      return simplified && MESSAGES['zh-Hans'] ? 'zh-Hans' : 'zh-Hant';
+    }
+    return Object.hasOwn(MESSAGES, language) ? language : 'zh-Hant';
   }
 
   function t(key, params) {
@@ -1378,7 +1393,7 @@
   }
 
   function setLang(lang) {
-    if (!MESSAGES[lang]) return;
+    if (!Object.hasOwn(MESSAGES, lang)) return;
     currentLang = lang;
     try {
       localStorage.setItem(STORAGE_KEY, lang);
