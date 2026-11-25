@@ -17,7 +17,7 @@
   const MESSAGES = {
     'zh-Hant': {
       'meta.title': '免費線上圖片轉檔｜免上傳、批次轉換 | Switch Image',
-      'meta.description': '免費本地批次轉檔，支援 JPEG XL 雙向轉換及 HEIC、PSD、TIFF、TGA、RAW 預覽輸入。可縮放、壓縮與加浮水印。',
+      'meta.description': '免費線上批次轉換 JPG、PNG、WebP、AVIF 與 JPEG XL，也可讀取 HEIC、PSD、TIFF 和 RAW 預覽。支援縮放、壓縮與浮水印，全程免上傳。',
       'nav.aria': '站台導覽',
       'nav.badgeMain': '100% 本地運算',
       'nav.badgeExtra': '・不上傳',
@@ -258,7 +258,7 @@
 
     en: {
       'meta.title': 'Free Online Image Converter | Batch Convert Locally | Switch Image',
-      'meta.description': 'Convert images locally in batches with JPEG XL import and export, plus HEIC, PSD, TIFF, TGA, and RAW preview input.',
+      'meta.description': 'Batch convert JPG, PNG, WebP, AVIF, and JPEG XL online. Import HEIC, PSD, TIFF, and RAW previews. Resize, compress, and watermark images without uploading.',
       'nav.aria': 'Site navigation',
       'nav.badgeMain': '100% Local',
       'nav.badgeExtra': ' · No Upload',
@@ -499,7 +499,7 @@
 
     ja: {
       'meta.title': '無料オンライン画像変換｜アップロード不要・一括変換 | Switch Image',
-      'meta.description': 'JPEG XL の入出力、HEIC・PSD・TIFF・TGA・RAW プレビューの読み込みに対応するローカル画像変換ツール。',
+      'meta.description': 'JPG・PNG・WebP・AVIF・JPEG XL を一括変換。HEIC・PSD・TIFF・RAW プレビューも読み込み可能。アップロード不要で縮小・圧縮・透かしに対応。',
       'nav.aria': 'サイトナビゲーション',
       'nav.badgeMain': '100% ローカル処理',
       'nav.badgeExtra': '・送信なし',
@@ -740,7 +740,7 @@
 
     es: {
       'meta.title': 'Conversor de imágenes gratis y por lotes | Switch Image',
-      'meta.description': 'Convierte imágenes localmente por lotes con entrada y salida JPEG XL y entrada HEIC, PSD, TIFF, TGA y vistas previas RAW.',
+      'meta.description': 'Convierte JPG, PNG, WebP, AVIF y JPEG XL por lotes. Importa HEIC, PSD, TIFF y vistas previas RAW. Redimensiona, comprime y añade marcas de agua sin subir archivos.',
       'nav.aria': 'Navegación del sitio',
       'nav.badgeMain': '100% Local',
       'nav.badgeExtra': ' · Sin subir',

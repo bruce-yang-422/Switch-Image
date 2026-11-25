@@ -2,7 +2,7 @@
   "id": "./",
   "name": "Switch Image ⇄ 萬能圖片格式極速互轉",
   "short_name": "Switch Image",
-  "description": "免費本地批次轉檔，支援 JPEG XL 雙向轉換及 HEIC、PSD、TIFF、TGA、RAW 預覽輸入。可縮放、壓縮與加浮水印。",
+  "description": "免費線上批次轉換 JPG、PNG、WebP、AVIF 與 JPEG XL，也可讀取 HEIC、PSD、TIFF 和 RAW 預覽。支援縮放、壓縮與浮水印，全程免上傳。",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
