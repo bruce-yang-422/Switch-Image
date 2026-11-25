@@ -16,7 +16,7 @@
 
   const MESSAGES = {
     'zh-Hant': {
-      'meta.title': 'Switch Image｜免費線上圖片轉換工具・支援 14 種格式',
+      'meta.title': '免費線上圖片轉檔｜免上傳、批次轉換 | Switch Image',
       'meta.description': '免費本地批次轉檔，支援 JPEG XL 雙向轉換及 HEIC、PSD、TIFF、TGA、RAW 預覽輸入。可縮放、壓縮與加浮水印。',
       'nav.aria': '站台導覽',
       'nav.badgeMain': '100% 本地運算',
@@ -30,8 +30,8 @@
       'trust.fastTitle': '極速批量',
       'trust.fastDetail': '・一鍵下載 / ZIP',
       'trust.fastTip': '拖拉即轉，百張圖片秒級處理、一鍵 ZIP 打包',
-      'trust.formatsTitle': '全格式支援',
-      'trust.formatsDetail': '・14 大格式',
+      'trust.formatsTitle': '格式支援',
+      'trust.formatsDetail': '・14 類輸入、9 種輸出',
       'trust.formatsTip': '主流網頁、設計、圖示與 HEIC 格式自由切換',
       'trust.freeTitle': '零門檻',
       'trust.freeDetail': '・免登入無限制',
@@ -174,6 +174,7 @@
       'item.thumbTitle': '點擊放大檢視成品（確認裁切、底色與浮水印）',
       'item.formatTitle': '單獨切換此圖片的輸出格式',
       'matrix.summary': '查看支援的 14 大格式與本機瀏覽器能力一覽',
+      'matrix.useCases': '可批次將 HEIC 轉成 JPG、將 PSD 合成圖轉成 PNG，也支援 JPEG XL 雙向轉換。RAW 相片使用檔案內嵌的 JPEG 預覽。',
       'matrix.readOk': '支援讀入',
       'matrix.readHeic': '讀入（原生／CDN解碼）',
       'matrix.writeLocal': '純本地輸出',
@@ -256,7 +257,7 @@
     },
 
     en: {
-      'meta.title': 'Switch Image ⇄ Universal Local Image Converter',
+      'meta.title': 'Free Online Image Converter | Batch Convert Locally | Switch Image',
       'meta.description': 'Convert images locally in batches with JPEG XL import and export, plus HEIC, PSD, TIFF, TGA, and RAW preview input.',
       'nav.aria': 'Site navigation',
       'nav.badgeMain': '100% Local',
@@ -271,7 +272,7 @@
       'trust.fastDetail': ' · ZIP Export',
       'trust.fastTip': 'Drag and drop hundreds of images with one-click ZIP export',
       'trust.formatsTitle': '14 Formats',
-      'trust.formatsDetail': ' · All-in-One',
+      'trust.formatsDetail': ' · 14 input families, 9 outputs',
       'trust.formatsTip': 'Switch freely across web, design, icon, and iPhone HEIC formats',
       'trust.freeTitle': 'No Sign-Up',
       'trust.freeDetail': ' · Unlimited',
@@ -414,6 +415,7 @@
       'item.thumbTitle': 'Click to preview converted output (check crop, background & watermark)',
       'item.formatTitle': 'Override output format for this image',
       'matrix.summary': 'View all 14 supported formats & browser codec capabilities',
+      'matrix.useCases': 'Batch convert HEIC to JPG and flattened PSD images to PNG. Import and export JPEG XL, or convert embedded JPEG previews from RAW photos.',
       'matrix.readOk': 'Decode',
       'matrix.readHeic': 'Decode (Native / CDN)',
       'matrix.writeLocal': 'Local Encode',
@@ -496,7 +498,7 @@
     },
 
     ja: {
-      'meta.title': 'Switch Image ⇄ 万能ローカル画像フォーマット変換',
+      'meta.title': '無料オンライン画像変換｜アップロード不要・一括変換 | Switch Image',
       'meta.description': 'JPEG XL の入出力、HEIC・PSD・TIFF・TGA・RAW プレビューの読み込みに対応するローカル画像変換ツール。',
       'nav.aria': 'サイトナビゲーション',
       'nav.badgeMain': '100% ローカル処理',
@@ -511,7 +513,7 @@
       'trust.fastDetail': '・即保存 / ZIP',
       'trust.fastTip': '大量の画像もブラウザ内で高速処理、ワンクリックで ZIP 出力',
       'trust.formatsTitle': '9形式対応',
-      'trust.formatsDetail': '・主要形式網羅',
+      'trust.formatsDetail': '・入力14系統、出力9形式',
       'trust.formatsTip': 'Web・デザイン・アイコン・iPhone HEIC まで自在に変換',
       'trust.freeTitle': '登録不要',
       'trust.freeDetail': '・回数無制限',
@@ -654,6 +656,7 @@
       'item.thumbTitle': 'クリックして仕上がり画像を拡大表示（切り抜き・背景・透かし確認）',
       'item.formatTitle': 'この画像だけ出力形式を変更',
       'matrix.summary': '対応する 14 形式とブラウザ機能一覧を表示',
+      'matrix.useCases': 'HEIC から JPG、PSD の合成画像から PNG へ一括変換できます。JPEG XL は入出力に対応し、RAW 写真は埋め込み JPEG プレビューを使用します。',
       'matrix.readOk': '読込対応',
       'matrix.readHeic': '読込（標準／CDN）',
       'matrix.writeLocal': 'ローカル出力',
@@ -736,7 +739,7 @@
     },
 
     es: {
-      'meta.title': 'Switch Image ⇄ Conversor Universal de Imágenes Local',
+      'meta.title': 'Conversor de imágenes gratis y por lotes | Switch Image',
       'meta.description': 'Convierte imágenes localmente por lotes con entrada y salida JPEG XL y entrada HEIC, PSD, TIFF, TGA y vistas previas RAW.',
       'nav.aria': 'Navegación del sitio',
       'nav.badgeMain': '100% Local',
@@ -751,7 +754,7 @@
       'trust.fastDetail': ' · ZIP',
       'trust.fastTip': 'Convierte cientos de imágenes al instante y descárgalas en ZIP',
       'trust.formatsTitle': '14 Formatos',
-      'trust.formatsDetail': ' · Todo en 1',
+      'trust.formatsDetail': ' · 14 familias de entrada y 9 formatos de salida',
       'trust.formatsTip': 'Compatible con formatos web, diseño, iconos y HEIC de iPhone',
       'trust.freeTitle': 'Sin Registro',
       'trust.freeDetail': ' · Gratis',
@@ -894,6 +897,7 @@
       'item.thumbTitle': 'Haz clic para ampliar el resultado (recorte, fondo y marca de agua)',
       'item.formatTitle': 'Cambiar formato solo para esta imagen',
       'matrix.summary': 'Ver los 14 formatos compatibles y capacidades del navegador',
+      'matrix.useCases': 'Convierte por lotes HEIC a JPG y composiciones PSD a PNG. Importa y exporta JPEG XL o convierte las vistas previas JPEG incrustadas en fotos RAW.',
       'matrix.readOk': 'Lectura',
       'matrix.readHeic': 'Lectura (Nativo / CDN)',
       'matrix.writeLocal': 'Escritura Local',
