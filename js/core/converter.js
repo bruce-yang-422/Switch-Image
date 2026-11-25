@@ -17,7 +17,18 @@
     return { w, h };
   }
 
-  function computeLayout(origW, origH, maxWidth, maxHeight, resizeMode, formatMaxDim) {
+  function computeLayout(origW, origH, settings, formatMaxDim) {
+    let { maxWidth, maxHeight, resizeMode } = settings;
+    const { sizeLimitValue, sizeLimitSide } = settings;
+    if (sizeLimitValue > 0) {
+      const limitWidth = sizeLimitSide === 'width' ||
+        (sizeLimitSide === 'longest' && origW >= origH) ||
+        (sizeLimitSide === 'shortest' && origW <= origH);
+      maxWidth = limitWidth ? sizeLimitValue : 0;
+      maxHeight = limitWidth ? 0 : sizeLimitValue;
+      resizeMode = 'contain';
+    }
+
     // Fixed canvas modes ('pad' or 'cover') require both width and height
     if ((resizeMode === 'pad' || resizeMode === 'cover') && maxWidth > 0 && maxHeight > 0) {
       const capped = clampToCap(maxWidth, maxHeight, formatMaxDim);
@@ -113,9 +124,7 @@
         : computeLayout(
             decoded.width,
             decoded.height,
-            settings.maxWidth,
-            settings.maxHeight,
-            settings.resizeMode,
+            settings,
             maxDim
           );
 
@@ -174,6 +183,26 @@
           throw new Error(`未支援的輸出引擎：${formatInfo.engine}`);
       }
 
+      let preview = null;
+      if (formatInfo.id === 'jxl') {
+        const url = URL.createObjectURL(blob);
+        try {
+          await SI.imageDecoder.loadImageFromUrl(url);
+        } catch {
+          const { width, height, pixels } = await SI.imageDecoder.runCodecWorker({ file: blob, format: 'jxl' });
+          const previewCanvas = document.createElement('canvas');
+          previewCanvas.width = width;
+          previewCanvas.height = height;
+          previewCanvas.getContext('2d').putImageData(new ImageData(pixels, width, height), 0, 0);
+          preview = await SI.canvasEncoder.canvasToBlob(previewCanvas, 'image/png');
+        } finally {
+          URL.revokeObjectURL(url);
+        }
+      }
+
+      if (!store.state.items.includes(item)) return;
+      if (item.outPreviewUrl) URL.revokeObjectURL(item.outPreviewUrl);
+      item.outPreviewUrl = preview ? URL.createObjectURL(preview) : null;
       if (item.outUrl) {
         URL.revokeObjectURL(item.outUrl);
       }

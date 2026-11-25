@@ -4,7 +4,7 @@
 (function (root) {
   const SI = (root.SwitchImage = root.SwitchImage || {});
 
-  const IMAGE_EXT_REGEX = /\.(png|jpe?g|jfif|gif|bmp|webp|avif|svg|ico|heic|heif|tiff?)$/i;
+  const IMAGE_EXT_REGEX = /\.(png|jpe?g|jfif|gif|bmp|webp|avif|svg|ico|heic|heif|tiff?|psd|jxl|tga)$/i;
 
   function formatBytes(bytes) {
     if (!bytes || bytes <= 0) return '0 B';

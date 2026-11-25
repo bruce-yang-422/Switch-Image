@@ -51,7 +51,7 @@
       statusHtml = `<span class="status-tag status-error">${escapeHtml(item.error)}</span>`;
     }
 
-    const thumbSrc = item.outUrl || item.previewOrigUrl || item.origUrl;
+    const thumbSrc = item.outPreviewUrl || item.outUrl || item.previewOrigUrl || item.origUrl;
     const previewLabel = escapeHtml(t('item.preview'));
 
     el.innerHTML = `
@@ -66,6 +66,7 @@
         <div class="file-meta">
           ${sizeHtml}
           ${dimHtml}
+          ${item.firstPageOnly ? `<span>${escapeHtml(t('decode.firstPage'))}</span>` : ''}
           ${statusHtml}
         </div>
       </div>

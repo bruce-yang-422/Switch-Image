@@ -23,6 +23,7 @@
   function renderFormatButtons() {
     const { outputFormats, settings } = SI.store.state;
     const { escapeHtml } = SI.formatters;
+    const popular = new Set(['webp', 'png', 'jpg', 'avif']);
 
     dom.formatSelector.innerHTML = outputFormats
       .map(fmt => {
@@ -30,7 +31,7 @@
         const badge = SI.i18n ? SI.i18n.getFormatBadge(fmt) : fmt.badge || fmt.ext.toUpperCase();
         const desc = SI.i18n ? SI.i18n.getFormatDesc(fmt) : fmt.description;
         return `
-          <button type="button" class="format-btn ${active}" data-format="${escapeHtml(fmt.id)}" title="${escapeHtml(desc)}">
+          <button type="button" class="format-btn ${popular.has(fmt.id) ? '' : 'format-extra'} ${active}" data-format="${escapeHtml(fmt.id)}" title="${escapeHtml(desc)}">
             <span class="format-btn-name">${escapeHtml(fmt.label)}</span>
             <span class="format-btn-tag">${escapeHtml(badge)}</span>
           </button>
@@ -176,9 +177,8 @@
 
   function syncAllInputsFromStore() {
     const s = SI.store.state.settings;
-    dom.maxWidthInput.value = s.maxWidth || '';
-    dom.maxHeightInput.value = s.maxHeight || '';
-    if (dom.resizeModeSelect) dom.resizeModeSelect.value = s.resizeMode || 'contain';
+    dom.sizeLimitSide.value = s.sizeLimitSide;
+    dom.sizeLimitValue.value = s.sizeLimitValue || '';
     dom.bgColorInput.value = s.bgColor || '#ffffff';
     renderIcoSizeChips();
     dom.svgModeSelect.value = s.svgMode || 'embed';
@@ -219,6 +219,7 @@
 
     s.activeTemplateId = '';
     s.resizeMode = 'contain';
+    s.sizeLimitValue = 0;
     if (ps.format) s.format = ps.format;
     if (typeof ps.quality === 'number') s.quality = ps.quality;
     s.maxWidth = parseInt(ps.maxWidth, 10) || 0;
@@ -248,6 +249,13 @@
 
     rerenderLocale();
 
+    dom.formatExpand.addEventListener('click', () => {
+      const expanded = dom.formatSelector.classList.toggle('expanded');
+      const key = expanded ? 'step1.fewerFormats' : 'step1.moreFormats';
+      dom.formatExpand.setAttribute('aria-expanded', String(expanded));
+      dom.formatExpand.dataset.i18n = key;
+      dom.formatExpand.textContent = t(key);
+    });
     dom.formatSelector.addEventListener('click', e => {
       const btn = e.target.closest('[data-format]');
       if (!btn) return;
@@ -267,25 +275,23 @@
     });
     dom.qualityRange.addEventListener('change', scheduleReconvert);
 
-    dom.maxWidthInput.addEventListener('change', () => {
-      SI.store.state.settings.maxWidth = parseInt(dom.maxWidthInput.value, 10) || 0;
-      SI.store.state.settings.activeTemplateId = '';
+    function applySizeLimit() {
+      const s = SI.store.state.settings;
+      s.sizeLimitSide = dom.sizeLimitSide.value;
+      s.sizeLimitValue = Math.max(0, Math.min(16383, Math.floor(dom.sizeLimitValue.valueAsNumber) || 0));
+      dom.sizeLimitValue.value = s.sizeLimitValue || '';
+      s.maxWidth = 0;
+      s.maxHeight = 0;
+      s.resizeMode = 'contain';
+      s.activeTemplateId = '';
       SI.advancedTools?.renderTemplates();
       SI.advancedTools?.updateDockBadges();
       scheduleReconvert();
-    });
-    dom.maxHeightInput.addEventListener('change', () => {
-      SI.store.state.settings.maxHeight = parseInt(dom.maxHeightInput.value, 10) || 0;
-      SI.store.state.settings.activeTemplateId = '';
-      SI.advancedTools?.renderTemplates();
-      SI.advancedTools?.updateDockBadges();
-      scheduleReconvert();
-    });
-
-    dom.resizeModeSelect?.addEventListener('change', () => {
-      SI.store.state.settings.resizeMode = dom.resizeModeSelect.value;
-      SI.advancedTools?.updateDockBadges();
-      scheduleReconvert();
+    }
+    dom.sizeLimitValue.addEventListener('change', applySizeLimit);
+    dom.sizeLimitSide.addEventListener('change', () => {
+      SI.store.state.settings.sizeLimitSide = dom.sizeLimitSide.value;
+      if (dom.sizeLimitValue.value) applySizeLimit();
     });
 
     dom.bgModeSelect.addEventListener('change', () => {

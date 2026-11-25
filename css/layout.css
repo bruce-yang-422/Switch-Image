@@ -108,13 +108,43 @@
 
 .format-bar {
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-columns: repeat(9, minmax(0, 1fr));
   gap: var(--space-2);
 }
 
+.step-head .format-expand {
+  display: none;
+}
+
 @media (max-width: 780px) {
+  .step-head .format-expand {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+  #formatHint {
+    display: none;
+  }
   .format-bar {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* Five choices on the first row and four full-width choices on the second. */
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+    column-gap: 0;
+    margin-inline: calc(var(--space-2) / -2);
+  }
+  .format-bar > .format-btn {
+    grid-column: span 4;
+    margin-inline: calc(var(--space-2) / 2);
+  }
+  .format-bar > .format-btn:nth-child(n+6) {
+    grid-column: span 5;
+  }
+  .format-bar:not(.expanded) > .format-btn {
+    grid-column: span 5;
+  }
+  .format-bar:not(.expanded):has(> .format-extra.active) > .format-btn {
+    grid-column: span 4;
+  }
+  .format-bar:not(.expanded) > .format-extra:not(.active) {
+    display: none;
   }
 }
 
@@ -673,6 +703,16 @@ input[type="range"].quick-range {
   color: var(--text-muted);
 }
 
+#sizeLimitValue {
+  appearance: textfield;
+}
+
+#sizeLimitValue::-webkit-inner-spin-button,
+#sizeLimitValue::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .input-group {
   display: flex;
   align-items: center;
@@ -864,7 +904,11 @@ input[type="range"].quick-range {
     text-overflow: ellipsis;
   }
   .format-bar {
-    gap: 6px;
+    row-gap: 6px;
+    margin-inline: -3px;
+  }
+  .format-bar > .format-btn {
+    margin-inline: 3px;
   }
   .format-btn {
     min-height: 44px;

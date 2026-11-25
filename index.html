@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Switch Image｜免費線上圖片轉換工具・支援 9 種格式</title>
+  <title>Switch Image｜免費線上圖片轉換工具・支援 13 種格式</title>
   <meta name="description" content="免費線上圖片轉換工具，支援 WebP、JPG、PNG、AVIF、GIF、ICO、SVG、BMP、HEIC 批次轉檔、壓縮、裁切與浮水印。圖片全程在瀏覽器本地處理，免上傳、免登入、無廣告。" />
   <meta name="keywords" content="線上圖片轉換, 圖片線上轉換, 免費圖片轉換, 圖片格式轉換, 圖片轉檔, 線上轉圖, WebP 轉 JPG, PNG 轉 WebP, HEIC 轉 JPG, AVIF 轉換, ICO 製作, SVG 轉換, 批次轉檔, 圖片壓縮, 本地轉檔, Switch Image, online image converter, image converter" />
   <meta name="author" content="Bruce Yang" />
@@ -70,7 +70,7 @@
       "featureList": [
         "100% Client-Side Local Processing",
         "Offline-Ready Progressive Web App (PWA)",
-        "9 Image Formats (WebP, PNG, JPG, AVIF, GIF, ICO, SVG, BMP, HEIC)",
+        "13 Input Formats (WebP, PNG, JPG, AVIF, GIF, ICO, SVG, BMP, HEIC, PSD, TIFF, JPEG XL, TGA)",
         "Multi-Select ICO Icon Packer (16/32/48/64/128/256px)",
         "45 Social, E-Commerce & SEO Size Templates",
         "Batch Renaming & Custom Text/Logo Watermarks",
@@ -177,9 +177,9 @@
         </span>
         <span class="trust-pill" data-i18n-title="trust.formatsTip" title="主流網頁、設計、圖示與 HEIC 格式自由切換">
           <img class="ui-icon icon-primary" src="./assets/icons/layers.svg" alt="" width="15" height="15" aria-hidden="true" />
-          <span class="trust-pill-text"><strong data-i18n="trust.formatsTitle">全格式支援</strong><span class="trust-pill-detail" data-i18n="trust.formatsDetail">・9 大格式</span></span>
+          <span class="trust-pill-text"><strong data-i18n="trust.formatsTitle">全格式支援</strong><span class="trust-pill-detail" data-i18n="trust.formatsDetail">・13 大格式</span></span>
         </span>
-        <span class="trust-pill" data-i18n-title="trust.freeTip" title="免登入、免註冊、無次數與檔案大小限制">
+        <span class="trust-pill" data-i18n-title="trust.freeTip" title="免登入、免註冊、無每日轉檔次數限制">
           <img class="ui-icon" src="./assets/icons/unlock.svg" alt="" width="15" height="15" aria-hidden="true" />
           <span class="trust-pill-text"><strong data-i18n="trust.freeTitle">零門檻</strong><span class="trust-pill-detail" data-i18n="trust.freeDetail">・免登入無限制</span></span>
         </span>
@@ -202,6 +202,7 @@
             <span class="step-title" data-i18n="step1.title">想轉成什麼格式？</span>
           </div>
           <span id="formatHint" class="step-hint"></span>
+          <button id="formatExpand" type="button" class="btn btn-secondary btn-sm format-expand" aria-controls="formatSelector" aria-expanded="false" data-i18n="step1.moreFormats">全部格式</button>
         </div>
 
         <div id="formatSelector" class="format-bar" role="radiogroup" data-i18n-aria="step1.aria" aria-label="選擇目標輸出格式"></div>
@@ -250,7 +251,7 @@
       <!-- Step 2: Dropzone (Automatically compacts to a slim add-more bar once files are added!) -->
       <section class="studio-drop-wrap">
         <div id="dropzone" class="dropzone" tabindex="0" role="button">
-          <input id="fileInput" type="file" accept="image/*,.heic,.heif,.avif,.ico,.svg,.webp,.bmp" multiple hidden />
+          <input id="fileInput" type="file" accept="image/*,.heic,.heif,.avif,.ico,.svg,.webp,.bmp,.psd,.tiff,.tif,.jxl,.tga" multiple hidden />
           <input id="folderInput" type="file" webkitdirectory directory multiple hidden />
 
           <!-- Full view (when empty) -->
@@ -270,7 +271,7 @@
             </div>
             <div class="dropzone-formats">
               <img class="ui-icon" src="./assets/icons/sparkles.svg" alt="" width="14" height="14" aria-hidden="true" />
-              <span data-i18n="drop.supportedInput">支援輸入：PNG・JPG・WebP・AVIF・GIF・ICO・SVG・BMP・iPhone HEIC</span>
+              <span data-i18n="drop.supportedInput">支援輸入：PNG・JPG・WebP・AVIF・GIF・ICO・SVG・BMP・HEIC・PSD・TIFF/TIF・JPEG XL・TGA</span>
             </div>
           </div>
 
@@ -342,24 +343,19 @@
               </div>
 
               <div class="field">
-                <label for="maxWidth">
+                <label for="sizeLimitValue">
                   <span data-i18n="basic.sizeLimit">尺寸限制（px）</span>
-                  <span class="hint" data-i18n="basic.sizeHint">留空保留原尺寸</span>
+                  <span class="hint" data-i18n="basic.sizeHint">等比縮小，留空保留原尺寸</span>
                 </label>
                 <div class="input-group">
-                  <input id="maxWidth" type="number" min="1" max="16383" data-i18n-placeholder="basic.widthPh" placeholder="寬" />
-                  <span class="input-sep">×</span>
-                  <input id="maxHeight" type="number" min="1" max="16383" data-i18n-placeholder="basic.heightPh" placeholder="高" />
+                  <select id="sizeLimitSide" data-i18n-aria="basic.sizeLimit" aria-label="尺寸限制（px）">
+                    <option value="height" data-i18n="basic.limitHeight">限制高</option>
+                    <option value="width" data-i18n="basic.limitWidth">限制寬</option>
+                    <option value="longest" selected data-i18n="basic.limitLongest">限制最長邊</option>
+                    <option value="shortest" data-i18n="basic.limitShortest">限制最短邊</option>
+                  </select>
+                  <input id="sizeLimitValue" type="number" min="1" max="16383" step="1" />
                 </div>
-              </div>
-
-              <div class="field">
-                <label for="resizeMode" data-i18n="basic.resizeMode">縮放方式</label>
-                <select id="resizeMode">
-                  <option value="contain" selected data-i18n="basic.modeContain">等比縮放（不裁切）</option>
-                  <option value="pad" data-i18n="basic.modePad">固定畫布置中補底色（方圖推薦）</option>
-                  <option value="cover" data-i18n="basic.modeCover">固定尺寸滿版置中裁切</option>
-                </select>
               </div>
 
               <div class="field">
@@ -388,10 +384,21 @@
               </div>
             </div>
             <div class="tpl-toolbar">
-              <label class="checkbox-label">
-                <input id="templateApplySuffix" type="checkbox" checked />
-                <span data-i18n-html="tpl.applySuffixHtml">套用時自動加上檔名後綴（例如 <code>_gform</code>、<code>_fbCover</code>）</span>
-              </label>
+              <div id="templateSuffixOptions" class="tpl-suffix-options" role="group" data-i18n-aria="tpl.suffix" aria-label="檔名後綴">
+                <span data-i18n="tpl.suffix">檔名後綴</span>
+                <label class="checkbox-label"><input name="templateSuffixName" type="checkbox" checked /> <span data-i18n="tpl.suffixName">模板名稱</span></label>
+                <label class="checkbox-label"><input name="templateSuffixSize" type="checkbox" /> <span data-i18n="tpl.suffixSize">規格（寬x高）</span></label>
+                <label class="checkbox-label" for="templateSuffixDigits" data-i18n="tpl.suffixDigits">流水號位數</label>
+                <select id="templateSuffixDigits">
+                  <option value="0" data-i18n="tpl.suffixOff">不加流水號</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
               <button id="clearTemplateBtn" type="button" class="btn btn-secondary btn-sm" data-i18n="tpl.resetSize">重設尺寸限制</button>
             </div>
             <div id="ecommerceGrid" class="ecommerce-grid"></div>
@@ -543,7 +550,7 @@
         <summary>
           <span class="matrix-summary-left">
             <img class="ui-icon icon-adaptive" src="./assets/icons/grid.svg" alt="" width="15" height="15" aria-hidden="true" />
-            <span data-i18n="matrix.summary">查看支援的 9 大格式與本機瀏覽器能力一覽</span>
+            <span data-i18n="matrix.summary">查看支援的 13 大格式與本機瀏覽器能力一覽</span>
           </span>
           <img class="ui-icon matrix-chevron" src="./assets/icons/chevron-down.svg" alt="" width="16" height="16" aria-hidden="true" />
         </summary>
@@ -671,7 +678,7 @@
           <summary>
             <span class="matrix-summary-left">
               <img class="ui-icon icon-adaptive" src="./assets/icons/grid.svg" alt="" width="15" height="15" aria-hidden="true" />
-              <span data-i18n="sheet.matrixHeading">支援的 9 大格式與本機能力</span>
+              <span data-i18n="sheet.matrixHeading">支援的 13 大格式與本機能力</span>
             </span>
             <img class="ui-icon matrix-chevron" src="./assets/icons/chevron-down.svg" alt="" width="16" height="16" aria-hidden="true" />
           </summary>

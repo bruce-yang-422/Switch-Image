@@ -50,7 +50,9 @@
     // Basic badge
     const basicParts = [];
     if (fmt.lossy && s.quality !== fmt.defaultQuality) basicParts.push(`${s.quality}%`);
-    if (s.maxWidth || s.maxHeight) {
+    if (s.sizeLimitValue) {
+      basicParts.push(`${s.sizeLimitValue} px`);
+    } else if (s.maxWidth || s.maxHeight) {
       const autoLabel = t('dock.autoDim');
       basicParts.push(`${s.maxWidth || autoLabel}×${s.maxHeight || autoLabel}`);
     }
@@ -84,7 +86,7 @@
   function updateRenamePreview() {
     const fmt = SI.store.getFormat(SI.store.state.settings.format);
     const sampleOrig = SI.store.state.items[0]?.origName || 'product_photo.png';
-    const preview = SI.renamer.buildOutputFilename(sampleOrig, fmt.ext, SI.store.state.rename, 0);
+    const preview = SI.store.computeItemOutName({ origName: sampleOrig, targetFormat: fmt.id }, 0);
     if (dom.renamePreview) {
       dom.renamePreview.textContent = `${sampleOrig}  →  ${preview}`;
     }
@@ -171,13 +173,9 @@
     s.maxWidth = tpl.width;
     s.maxHeight = tpl.height;
     s.resizeMode = tpl.resizeMode;
+    s.sizeLimitValue = 0;
     s.bgMode = tpl.bgMode;
     s.bgColor = tpl.bgColor;
-
-    if (dom.templateApplySuffix?.checked) {
-      SI.store.state.rename.suffix = tpl.suffix || '';
-      dom.renameSuffix.value = SI.store.state.rename.suffix;
-    }
 
     SI.store.applyGlobalFormatToItems(s.format);
     SI.store.refreshAllOutputNames();
@@ -205,9 +203,12 @@
     s.maxWidth = 0;
     s.maxHeight = 0;
     s.resizeMode = 'contain';
+    s.sizeLimitValue = 0;
     SI.settingsPanel.syncAllInputsFromStore();
     renderTemplates();
-    updateDockBadges();
+    SI.store.refreshAllOutputNames();
+    updateRenamePreview();
+    callbacks.onNamesUpdated?.();
     SI.toast.show(t('toast.templateReset'));
     scheduleReconvert();
   }
@@ -271,6 +272,17 @@
     });
 
     dom.clearTemplateBtn.addEventListener('click', clearTemplate);
+    dom.templateSuffixOptions.addEventListener('change', () => {
+      const group = dom.templateSuffixOptions;
+      SI.store.state.settings.templateSuffix = {
+        name: group.querySelector('[name="templateSuffixName"]').checked,
+        size: group.querySelector('[name="templateSuffixSize"]').checked,
+        digits: Number(group.querySelector('#templateSuffixDigits').value)
+      };
+      SI.store.refreshAllOutputNames();
+      updateRenamePreview();
+      callbacks.onNamesUpdated?.();
+    });
 
     function onRenameInputChange() {
       const r = SI.store.state.rename;

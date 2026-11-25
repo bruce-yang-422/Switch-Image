@@ -154,7 +154,11 @@
       "engine": "heic-decode",
       "badge": "僅輸入解碼",
       "description": "支援將 iPhone / iOS 的 HEIC / HEIF 照片解碼並轉換為 JPG、PNG、WebP、AVIF 等所有格式。"
-    }
+    },
+    {"id":"psd","label":"PSD","mime":"image/vnd.adobe.photoshop","ext":"psd","acceptExts":["psd"],"canRead":true,"canWrite":false,"descriptionKey":"decode.format.psd"},
+    {"id":"tiff","label":"TIFF / TIF","mime":"image/tiff","ext":"tiff","acceptExts":["tiff","tif"],"canRead":true,"canWrite":false,"descriptionKey":"decode.format.tiff"},
+    {"id":"jxl","label":"JPEG XL","mime":"image/jxl","ext":"jxl","acceptExts":["jxl"],"canRead":true,"canWrite":true,"lossy":true,"supportsAlpha":true,"defaultQuality":85,"maxDimension":16383,"engine":"canvas","badge":"JXL","descriptionKey":"decode.format.jxl"},
+    {"id":"tga","label":"TGA","mime":"image/x-tga","ext":"tga","acceptExts":["tga"],"canRead":true,"canWrite":false,"descriptionKey":"decode.format.tga"}
   ],
   "icoSizeOptions": [
     { "value": "multi", "label": "標準多尺寸 (16 / 32 / 48 / 256px)", "sizes": [16, 32, 48, 256] },

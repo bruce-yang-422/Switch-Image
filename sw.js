@@ -3,7 +3,7 @@
  * Enables full offline image conversion with stale-while-revalidate caching
  * using relative paths (compatible with root domains and GitHub Pages subpaths).
  */
-const CACHE_NAME = 'switchimage-static-v0.1.4';
+const CACHE_NAME = 'switchimage-static-v0.1.10';
 
 const CORE_ASSETS = [
   './',
@@ -32,6 +32,7 @@ const CORE_ASSETS = [
   './js/utils/zip-builder.js',
   './js/decoders/heic-decoder.js',
   './js/decoders/image-decoder.js',
+  './js/decoders/pro-image-worker.js',
   './js/encoders/canvas-encoder.js',
   './js/encoders/gif-encoder.js',
   './js/encoders/ico-encoder.js',

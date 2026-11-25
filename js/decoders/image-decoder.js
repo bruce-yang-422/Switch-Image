@@ -5,6 +5,96 @@
  */
 (function (root) {
   const SI = (root.SwitchImage = root.SwitchImage || {});
+  const workerUrl = new URL('pro-image-worker.js', document.currentScript.src);
+  let decodeQueue = Promise.resolve();
+
+  function runCodecWorker(message, transfer = []) {
+    return new Promise((resolve, reject) => {
+      const fail = key => reject(new Error(SI.i18n.t(key)));
+      let worker;
+      try {
+        worker = new Worker(workerUrl);
+      } catch {
+        fail('decode.worker');
+        return;
+      }
+      const finish = () => {
+        clearTimeout(timeout);
+        worker.terminate();
+      };
+      const timeout = setTimeout(() => {
+        finish();
+        fail('decode.timeout');
+      }, 60000);
+      worker.onmessage = ({ data }) => {
+        finish();
+        if (data.error) fail(data.error);
+        else resolve(data);
+      };
+      worker.onerror = () => {
+        finish();
+        fail('decode.worker');
+      };
+      worker.postMessage(message, transfer);
+    });
+  }
+
+  async function decodeProfessional(item, format) {
+    if (item.file.size > 128 * 1024 * 1024) throw new Error(SI.i18n.t('decode.size'));
+    if (format === 'jxl' && !item.decodedBlob) {
+      let img;
+      try {
+        img = await loadImageFromUrl(item.origUrl);
+      } catch {
+        // Older browsers need the WASM decoder.
+      }
+      if (img) {
+        const { naturalWidth: width, naturalHeight: height } = img;
+        if (width > 16383 || height > 16383 || width * height > 40_000_000) {
+          throw new Error(SI.i18n.t('decode.size'));
+        }
+        return { img, width, height };
+      }
+    }
+    if (!item.decodedBlob) {
+      if (!item.decodePromise) {
+        const task = decodeQueue.then(async () => {
+          if (!SI.store.state.items.includes(item)) throw new Error();
+          const { width, height, pixels, firstPageOnly, orientation } = await runCodecWorker({ file: item.file, format });
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          canvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(pixels.buffer), width, height), 0, 0);
+          let preview = canvas;
+          const transforms = {
+            2: [-1, 0, 0, 1, width, 0], 3: [-1, 0, 0, -1, width, height],
+            4: [1, 0, 0, -1, 0, height], 5: [0, 1, 1, 0, 0, 0],
+            6: [0, 1, -1, 0, height, 0], 7: [0, -1, -1, 0, height, width],
+            8: [0, -1, 1, 0, 0, width]
+          };
+          if (transforms[orientation]) {
+            preview = document.createElement('canvas');
+            preview.width = orientation >= 5 ? height : width;
+            preview.height = orientation >= 5 ? width : height;
+            const ctx = preview.getContext('2d');
+            ctx.setTransform(...transforms[orientation]);
+            ctx.drawImage(canvas, 0, 0);
+          }
+          const blob = await new Promise(resolve => preview.toBlob(resolve, 'image/png'));
+          if (!blob) throw new Error(SI.i18n.t('decode.failed'));
+          if (!SI.store.state.items.includes(item)) throw new Error();
+          item.decodedBlob = blob;
+          item.previewOrigUrl = URL.createObjectURL(blob);
+          item.firstPageOnly = firstPageOnly;
+        });
+        item.decodePromise = task.finally(() => { item.decodePromise = null; });
+        decodeQueue = item.decodePromise.catch(() => {});
+      }
+      await item.decodePromise;
+    }
+    const img = await loadImageFromUrl(item.previewOrigUrl);
+    return { img, width: img.naturalWidth, height: img.naturalHeight };
+  }
 
   function loadImageFromUrl(url) {
     return new Promise((resolve, reject) => {
@@ -88,6 +178,10 @@
    */
   async function decodeItem(item) {
     const file = item.file;
+    const format = {
+      psd: 'psd', tif: 'tiff', tiff: 'tiff', tga: 'tga', jxl: 'jxl'
+    }[SI.formatters.getFileExtension(file.name)];
+    if (typeof format === 'string') return decodeProfessional(item, format);
     const isSvg =
       (file.type || '').toLowerCase() === 'image/svg+xml' ||
       /\.svg$/i.test(file.name || '');
@@ -127,6 +221,7 @@
 
   SI.imageDecoder = {
     loadImageFromUrl,
-    decodeItem
+    decodeItem,
+    runCodecWorker
   };
 })(window);

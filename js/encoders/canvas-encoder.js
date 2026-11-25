@@ -6,6 +6,7 @@
   const SI = (root.SwitchImage = root.SwitchImage || {});
 
   let avifWasmPromise = null;
+  let jxlQueue = Promise.resolve();
 
   function canvasToBlob(canvas, mime, quality) {
     return new Promise((resolve, reject) => {
@@ -75,6 +76,18 @@
     const quality = options?.quality ?? 0.85;
     if (formatInfo.id === 'avif') {
       return encodeAvif(canvas, quality);
+    }
+    if (formatInfo.id === 'jxl') {
+      const task = jxlQueue.then(async () => {
+        const { width, height } = canvas;
+        if (width * height > 40_000_000) throw new Error(SI.i18n.t('decode.size'));
+        const { data: pixels } = canvas.getContext('2d').getImageData(0, 0, width, height);
+        const encoding = { pixels, width, height, quality: Math.round(quality * 100) };
+        const { blob } = await SI.imageDecoder.runCodecWorker({ encoding }, [pixels.buffer]);
+        return blob;
+      });
+      jxlQueue = task.catch(() => {});
+      return task;
     }
     const q = formatInfo.lossy ? quality : undefined;
     const blob = await canvasToBlob(canvas, formatInfo.mime, q);

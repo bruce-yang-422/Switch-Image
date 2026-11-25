@@ -44,7 +44,14 @@
     return `${stem}.${cleanExt}`;
   }
 
+  function toSnakeCase(value) {
+    return value.normalize('NFKD').replace(/\p{Mark}/gu, '')
+      .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  }
+
   SI.renamer = {
+    toSnakeCase,
     sanitizeSegment,
     buildOutputFilename
   };

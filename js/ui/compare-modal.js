@@ -43,7 +43,7 @@
     activeItem = item;
     syncText();
     dom.compareStage?.classList.remove('is-zoomed');
-    dom.compareOutImg.src = item.outUrl;
+    dom.compareOutImg.src = item.outPreviewUrl || item.outUrl;
     dom.compareOutImg.alt = item.outName;
     dom.compareModal.classList.add('open');
   }

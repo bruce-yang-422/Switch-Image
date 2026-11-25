@@ -96,6 +96,10 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 
 ## 🧩 Supported Formats & Codec Matrix
 
+PSD, TIFF/TIF, JPEG XL, and TGA are input formats for preview and batch conversion. PSD uses the saved 8-bit composite. TIFF converts the first page of common 8-bit RGB/RGBA or 1-/8-bit grayscale files. TGA supports uncompressed and RLE true-color files. JPEG XL is also a still-image output format with adjustable quality, transparency, and an on-demand encoder.
+
+Open the app over HTTP(S) for worker-based decoding. The PSD, TIFF, and JPEG XL fallback decoders are fetched on demand, and files are processed locally. These inputs are limited to 128 MiB, 40 megapixels, and 16,383 pixels per side.
+
 | Format | Decode | Encode | Alpha | Engine &amp; Implementation Details |
 | :--- | :---: | :---: | :---: | :--- |
 | **WebP** | ✅ | ✅ Native | ✅ | Native browser Canvas encoder with lossy quality control (default 85%) |
@@ -234,7 +238,7 @@ Deploy the repository root (`.`) directly to **Cloudflare Pages**, **Netlify**, 
 
 - **100% Client-Side Execution**: Image decoding, resizing, watermarking, format encoding, and ZIP creation all run strictly inside browser memory. No image data is ever transmitted to any server.
 - **Zero Tracking**: No analytics scripts, no tracking cookies, and no third-party ads.
-- **On-Demand Codec Loading**: External client-side decoders/encoders are only fetched if you explicitly invoke **AVIF encoding** (on browsers lacking native support) or **HEIC decoding** (on non-Safari browsers).
+- **On-Demand Codec Loading**: PSD and TIFF use external JavaScript decoders. JPEG XL, AVIF, and HEIC load fallback codecs when needed.
 
 ---
 

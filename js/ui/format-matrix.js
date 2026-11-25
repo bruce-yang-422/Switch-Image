@@ -22,6 +22,8 @@
         let writeTag = '';
         if (!fmt.canWrite) {
           writeTag = `<span class="cap-tag cap-muted">${escapeHtml(t('matrix.writeReadOnly'))}</span>`;
+        } else if (fmt.id === 'jxl') {
+          writeTag = `<span class="cap-tag cap-cloud">${escapeHtml(t('matrix.writeWasm'))}</span>`;
         } else if (fmt.id === 'avif') {
           writeTag = caps.avifEncode
             ? `<span class="cap-tag cap-ok">${escapeHtml(t('matrix.writeNative'))}</span>`
@@ -32,7 +34,7 @@
           writeTag = `<span class="cap-tag cap-ok">${escapeHtml(t('matrix.writeLocal'))}</span>`;
         }
 
-        const desc = SI.i18n ? SI.i18n.getFormatDesc(fmt) : fmt.description;
+        const desc = fmt.descriptionKey ? t(fmt.descriptionKey) : SI.i18n?.getFormatDesc(fmt) || fmt.description;
 
         return `
           <div class="matrix-item">

@@ -19,6 +19,8 @@
       quality: 85,
       maxWidth: 0,
       maxHeight: 0,
+      sizeLimitSide: 'longest',
+      sizeLimitValue: 0,
       resizeMode: 'contain', // 'contain' | 'pad' | 'cover'
       bgMode: 'transparent',
       bgColor: '#ffffff',
@@ -26,7 +28,8 @@
       icoSizes: [16, 32, 48, 256],
       svgMode: 'embed',
       svgColors: 16,
-      activeTemplateId: ''
+      activeTemplateId: '',
+      templateSuffix: { name: true, size: false, digits: 0 }
     },
     rename: {
       prefix: '',
@@ -93,7 +96,22 @@
   function computeItemOutName(item, indexHint) {
     const fmt = getFormat(item.targetFormat);
     const idx = typeof indexHint === 'number' ? indexHint : Math.max(0, store.items.indexOf(item));
-    return SI.renamer.buildOutputFilename(item.origName, fmt.ext, store.rename, idx);
+    const template = store.ecommerceTemplatesConfig?.templates?.find(tpl => tpl.id === store.settings.activeTemplateId);
+    const options = store.settings.templateSuffix;
+    let rename = store.rename;
+    if (template) {
+      const { platform, name } = SI.i18n.getTemplateDisplay(template, 'en');
+      const parts = [
+        options.name ? SI.renamer.toSnakeCase(`${platform} ${name}`) || SI.renamer.toSnakeCase(template.id) : '',
+        options.size ? `${template.width}x${template.height}` : ''
+      ].filter(Boolean);
+      rename = {
+        ...rename,
+        suffix: (rename.suffix || '') + (parts.length ? `_${parts.join('_')}` : ''),
+        ...(options.digits ? { addSequence: true, seqStart: 1, seqPad: options.digits } : {})
+      };
+    }
+    return SI.renamer.buildOutputFilename(item.origName, fmt.ext, rename, idx);
   }
 
   function refreshAllOutputNames() {
@@ -127,6 +145,7 @@
         outHeight: 0,
         outBlob: null,
         outUrl: null,
+        outPreviewUrl: null,
         status: 'queued',
         error: ''
       };
@@ -144,6 +163,7 @@
       URL.revokeObjectURL(item.previewOrigUrl);
     }
     if (item.outUrl) URL.revokeObjectURL(item.outUrl);
+    if (item.outPreviewUrl) URL.revokeObjectURL(item.outPreviewUrl);
   }
 
   function removeItemById(id) {
