@@ -67,6 +67,7 @@
           ${sizeHtml}
           ${dimHtml}
           ${item.firstPageOnly ? `<span>${escapeHtml(t('decode.firstPage'))}</span>` : ''}
+          ${item.rawPreview ? `<span>${escapeHtml(t('decode.rawPreview', { w: item.origWidth, h: item.origHeight }))}</span>` : ''}
           ${statusHtml}
         </div>
       </div>

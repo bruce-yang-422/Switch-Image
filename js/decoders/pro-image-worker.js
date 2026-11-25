@@ -154,10 +154,72 @@ async function encodeJxl({ pixels, width, height, quality }) {
   return new Blob([bytes], { type: 'image/jxl' });
 }
 
+function readJpegPreview(bytes, start) {
+  let offset = start + 2;
+  let pixels = 0;
+  let inScan = false;
+  let hasScan = false;
+  while (offset < bytes.length) {
+    if (inScan) offset = bytes.indexOf(0xff, offset);
+    if (offset < 0 || bytes[offset++] !== 0xff) return null;
+    while (bytes[offset] === 0xff) offset++;
+    const marker = bytes[offset++];
+    if (inScan && (marker === 0 || (marker >= 0xd0 && marker <= 0xd7))) continue;
+    if (marker === 0xd9) return hasScan && pixels ? { start, end: offset, pixels } : null;
+    inScan = false;
+    if (marker < 0xc0 || marker >= 0xf0 || marker === 0xd8 ||
+        (marker >= 0xd0 && marker <= 0xd7) || offset + 2 > bytes.length) return null;
+    const length = bytes[offset] * 256 + bytes[offset + 1];
+    if (length < 2 || offset + length > bytes.length) return null;
+    if ([0xc0, 0xc1, 0xc2].includes(marker)) {
+      if (length < 8 || bytes[offset + 2] !== 8) return null;
+      const height = bytes[offset + 3] * 256 + bytes[offset + 4];
+      const width = bytes[offset + 5] * 256 + bytes[offset + 6];
+      if (!width || !height || width > 16383 || height > 16383 || width * height > MAX_PIXELS) return null;
+      pixels = width * height;
+    }
+    if (marker === 0xda) {
+      if (!pixels) return null;
+      inScan = hasScan = true;
+    }
+    offset += length;
+  }
+  return null;
+}
+
+async function extractRawPreview(file) {
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const candidates = [];
+  for (let start = bytes.indexOf(0xff); start >= 0; start = bytes.indexOf(0xff, start + 1)) {
+    if (bytes[start + 1] !== 0xd8 || bytes[start + 2] !== 0xff) continue;
+    const preview = readJpegPreview(bytes, start);
+    if (!preview) continue;
+    candidates.push(preview);
+    candidates.sort((a, b) => b.pixels - a.pixels);
+    if (candidates.length > 12) candidates.pop();
+    start = preview.end - 1;
+  }
+  for (const { start, end } of candidates) {
+    const blob = file.slice(start, end, 'image/jpeg');
+    try {
+      const bitmap = await createImageBitmap(blob);
+      bitmap.close();
+      return blob;
+    } catch {
+      // Try the next largest embedded preview.
+    }
+  }
+  throw new Error('decode.rawMissing');
+}
+
 self.onmessage = async ({ data: { file, format, encoding } }) => {
   try {
     if (encoding) {
       self.postMessage({ blob: await encodeJxl(encoding) });
+      return;
+    }
+    if (format === 'raw') {
+      self.postMessage({ blob: await extractRawPreview(file) });
       return;
     }
     const buffer = await file.arrayBuffer();

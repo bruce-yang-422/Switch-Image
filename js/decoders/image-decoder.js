@@ -60,7 +60,15 @@
       if (!item.decodePromise) {
         const task = decodeQueue.then(async () => {
           if (!SI.store.state.items.includes(item)) throw new Error();
-          const { width, height, pixels, firstPageOnly, orientation } = await runCodecWorker({ file: item.file, format });
+          const { width, height, pixels, firstPageOnly, orientation, blob: rawPreview } =
+            await runCodecWorker({ file: item.file, format });
+          if (rawPreview) {
+            if (!SI.store.state.items.includes(item)) throw new Error();
+            item.decodedBlob = rawPreview;
+            item.previewOrigUrl = URL.createObjectURL(rawPreview);
+            item.rawPreview = true;
+            return;
+          }
           const canvas = document.createElement('canvas');
           canvas.width = width;
           canvas.height = height;
@@ -179,7 +187,8 @@
   async function decodeItem(item) {
     const file = item.file;
     const format = {
-      psd: 'psd', tif: 'tiff', tiff: 'tiff', tga: 'tga', jxl: 'jxl'
+      psd: 'psd', tif: 'tiff', tiff: 'tiff', tga: 'tga', jxl: 'jxl',
+      raw: 'raw', dng: 'raw', cr2: 'raw', cr3: 'raw', nef: 'raw', arw: 'raw'
     }[SI.formatters.getFileExtension(file.name)];
     if (typeof format === 'string') return decodeProfessional(item, format);
     const isSvg =

@@ -96,6 +96,8 @@ Zero-Build &bull; 4 Languages &bull; Light / Dark / System Theme &bull; Ad-Free 
 
 ## 🧩 Supported Formats & Codec Matrix
 
+RAW, DNG, CR2, CR3, NEF, and ARW can convert embedded JPEG previews. The result shows the preview resolution and uses its pixels. To convert Lightroom edits, export a JPEG or TIFF from Lightroom first.
+
 PSD, TIFF/TIF, JPEG XL, and TGA are input formats for preview and batch conversion. PSD uses the saved 8-bit composite. TIFF converts the first page of common 8-bit RGB/RGBA or 1-/8-bit grayscale files. TGA supports uncompressed and RLE true-color files. JPEG XL is also a still-image output format with adjustable quality, transparency, and an on-demand encoder.
 
 Open the app over HTTP(S) for worker-based decoding. The PSD, TIFF, and JPEG XL fallback decoders are fetched on demand, and files are processed locally. These inputs are limited to 128 MiB, 40 megapixels, and 16,383 pixels per side.
